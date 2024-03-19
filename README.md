@@ -1,6 +1,6 @@
 Team Members: Ved Joshi, Nishit Oberoi, Divij Gupta
 
-                                                                                                          **Real Time Stock App**
+ **Real Time Stock App**
 
 **State the problem/issue: **
 
