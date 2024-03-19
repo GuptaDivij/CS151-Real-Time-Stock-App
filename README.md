@@ -8,7 +8,7 @@ Several stock tracking applications exist in the market, such as Robinhood, Yaho
 
 Assumptions/Operating Environments/Intended Usage:
 
-Users will require a stable internet connection to receive real-time updates
+Users will require a stable internet connection to receive real-time updates. 
 Intended users are investors and traders who rely on accurate and timely stock market information
 
 High-Level Description of Solution:
