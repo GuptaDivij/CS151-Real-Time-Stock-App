@@ -2,7 +2,7 @@ Team Members: Ved Joshi, Nishit Oberoi, Divij Gupta
 
  **Real Time Stock App**
 
-**State the problem/issue: **
+**State the problem/issue:**
 
 The problem we aim to address is the need for a real-time stock tracking application that provides users with up-to-date information on stock prices, trends, and news. Many existing stock tracking applications suffer from delayed data updates, lack of user-friendly interfaces, or limited functionality. Our goal is to create a comprehensive solution that offers real-time data updates, intuitive user interfaces, and a wide range of features to assist users in making informed investment decisions.
 
