@@ -1,3 +1,5 @@
+Team #10
+
 Team Members: Ved Joshi, Nishit Oberoi, Divij Gupta
 
  **Real Time Stock App**
