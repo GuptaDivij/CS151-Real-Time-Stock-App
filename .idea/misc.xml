@@ -4,11 +4,11 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/Realtime-Stock-App/pom.xml" />
+        <option value="$PROJECT_DIR$/RealtimeStockApp/pom.xml" />
       </list>
     </option>
-    <option name="workspaceImportForciblyTurnedOn" value="true" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" project-jdk-name="openjdk-22" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" project-jdk-name="22" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
