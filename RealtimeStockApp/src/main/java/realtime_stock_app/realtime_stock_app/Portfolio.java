@@ -3,4 +3,7 @@ import java.util.*;
 public class Portfolio {
     private HashMap<Stock, Integer> portfolio;
 
+    public HashMap<Stock, Integer> getPortfolio() {
+        return portfolio;
+    }
 }

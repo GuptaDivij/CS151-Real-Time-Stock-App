@@ -1,5 +1,7 @@
 package realtime_stock_app.realtime_stock_app;
 
+import java.io.IOException;
+
 public class User{
     private String userID;
     private String usrname;
@@ -47,8 +49,9 @@ public class User{
 
     //methods
 
-    public void buy(int quantity, String stock){
-        PolygonService.getClosingPrice(stock);
+    public void buy(int quantity, String stock) throws IOException, InterruptedException {
+
+        String[] arr = PolygonService.getPriceInfo(stock);
     }
 
     public void sell(int quantity, Stock stock){
@@ -56,7 +59,8 @@ public class User{
     }
 
     public boolean login(String usrname, String usrpwd){
-
+        //update
+        return true;
     }
 
     public void logout(){
