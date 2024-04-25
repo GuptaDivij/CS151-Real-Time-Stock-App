@@ -4,14 +4,14 @@ import java.io.IOException;
 
 public class User{
     private String userID;
-    private String usrname;
-    private String usrpwd;
+    private String username;
+    private String userpwd;
     private String email;
     private Portfolio portfolio;
     public User(String userID, String usrname, String usrpwd) {
         this.userID = userID;
-        this.usrname = usrname;
-        this.usrpwd = usrpwd;
+        this.username = usrname;
+        this.userpwd = usrpwd;
         portfolio = new Portfolio();
     }
 
@@ -24,19 +24,19 @@ public class User{
     }
 
     public String getUsrname() {
-        return usrname;
+        return username;
     }
 
     public void setUsrname(String usrname) {
-        this.usrname = usrname;
+        this.username = usrname;
     }
 
     public String getUsrpwd() {
-        return usrpwd;
+        return userpwd;
     }
 
     public void setUsrpwd(String usrpwd) {
-        this.usrpwd = usrpwd;
+        this.userpwd = usrpwd;
     }
 
     public String getEmail() {
@@ -51,36 +51,15 @@ public class User{
 
     public void buy(int quantity, String stockTicker) throws IOException, InterruptedException {
 
-        String[] arr = PolygonService.getPriceInfo(stockTicker);
-        double thePrice = extractCloseValue(arr);
-        double openPrice = extractOpenValue(arr);
-        double stockWorth = quantity * thePrice;
+        double[] arr = PolygonService.getPriceInfo(stockTicker);
+        double thePrice = arr[1];
+        double openPrice = arr[0];
+        // no use of stockworth here
+        // double stockWorth = quantity * thePrice;
         double priceChange = (thePrice - openPrice) / openPrice;
 
-        portfolio.addStocks(new Stock(stockTicker, thePrice, priceChange, stockWorth), quantity);
+        portfolio.addStocks(new Stock(stockTicker, thePrice, priceChange), quantity);
 
-
-
-    }
-    public static double extractCloseValue(String[] arr) {
-        for (String s : arr) {
-            if (s.startsWith("\"close\"")) {
-                String[] parts = s.split(":");
-                String valueStr = parts[1].trim().replaceAll("[^\\d.]", ""); // Extracting numeric part
-                return Double.parseDouble(valueStr);
-            }
-        }
-        return 0;
-    }
-    public static double extractOpenValue(String[] arr){
-        for (String s : arr) {
-            if (s.startsWith("\"open\"")) {
-                String[] parts = s.split(":");
-                String valueStr = parts[1].trim().replaceAll("[^\\d.]", ""); // Extracting numeric part
-                return Double.parseDouble(valueStr);
-            }
-        }
-        return Double.NaN;
     }
     public void sell(int quantity, Stock stock){
 

@@ -8,9 +8,9 @@ public class Portfolio {
     }
 
     public void addStocks(Stock stock, int quantity){
-        portfolioList.put(stock, quantity);
-
+        portfolioList.put(stock, portfolioList.getOrDefault(stock, 0) + quantity);
     }
+
     public HashMap<Stock, Integer> getPortfolio() {
         return portfolioList;
     }
