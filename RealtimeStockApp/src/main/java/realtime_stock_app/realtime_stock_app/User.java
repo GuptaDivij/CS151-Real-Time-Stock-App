@@ -1,25 +1,26 @@
 package realtime_stock_app.realtime_stock_app;
 
-import com.mongodb.*;
-
 import java.io.IOException;
 
-import static realtime_stock_app.realtime_stock_app.MongoDB.*;
-
 public class User{
-    private final String userID;
+    private String userID;
     private String usrname;
     private String usrpwd;
-
+    private String email;
+    private Portfolio portfolio;
     public User(String userID, String usrname, String usrpwd) {
         this.userID = userID;
         this.usrname = usrname;
         this.usrpwd = usrpwd;
-        users.insert(new BasicDBObject("User ID", this.userID).append("Username", this.usrname).append("Password", this.usrpwd));
+        portfolio = new Portfolio();
     }
 
     public String getUserID() {
         return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
     public String getUsrname() {
@@ -38,33 +39,67 @@ public class User{
         this.usrpwd = usrpwd;
     }
 
-    //methods
-
-    public void buy(int quantity, String stock) throws IOException, InterruptedException {
-
-        String[] arr = PolygonService.getPriceInfo(stock);
+    public String getEmail() {
+        return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    //methods
+
+    public void buy(int quantity, String stockTicker) throws IOException, InterruptedException {
+
+        String[] arr = PolygonService.getPriceInfo(stockTicker);
+        double thePrice = extractCloseValue(arr);
+        double openPrice = extractOpenValue(arr);
+        double stockWorth = quantity * thePrice;
+        double priceChange = (thePrice - openPrice) / openPrice;
+
+        portfolio.addStocks(new Stock(stockTicker, thePrice, priceChange, stockWorth), quantity);
+
+
+
+    }
+    public static double extractCloseValue(String[] arr) {
+        for (String s : arr) {
+            if (s.startsWith("\"close\"")) {
+                String[] parts = s.split(":");
+                String valueStr = parts[1].trim().replaceAll("[^\\d.]", ""); // Extracting numeric part
+                return Double.parseDouble(valueStr);
+            }
+        }
+        return 0;
+    }
+    public static double extractOpenValue(String[] arr){
+        for (String s : arr) {
+            if (s.startsWith("\"open\"")) {
+                String[] parts = s.split(":");
+                String valueStr = parts[1].trim().replaceAll("[^\\d.]", ""); // Extracting numeric part
+                return Double.parseDouble(valueStr);
+            }
+        }
+        return Double.NaN;
+    }
     public void sell(int quantity, Stock stock){
 
     }
 
     public boolean login(String usrname, String usrpwd){
-        DBObject query = new BasicDBObject("User ID", this.userID);
-        DBCursor cursor = users.find(query);
-        return usrname.equals(cursor.one().get("Username")) && usrpwd.equals(cursor.one().get("Password"));
-
+        //update
+        return true;
     }
 
     public void logout(){
 
     }
 
-    public static void main(String[] args) {
-        mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
-        database = mongoClient.getDB("StockAppUsers");
-        users = database.getCollection("Users");
-        User newUser = new User("ABCD", "hello", "world");
-        System.out.println(newUser.login("hello", "world"));
+    public static void main(String[] args){
+        User test = new User("123", "Nish", "pwd");
+        //test.buy(2, "AAPL");
+
     }
+
+
 }

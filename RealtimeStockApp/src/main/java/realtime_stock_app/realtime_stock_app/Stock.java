@@ -12,7 +12,7 @@ public class Stock {
      * @param currentPrice The current trading price of the stock.
      * @param priceChangePercentage The percentage change in price of the stock.
      */
-    public Stock(String symbol, double currentPrice, double priceChangePercentage) {
+    public Stock(String symbol, double currentPrice, double priceChangePercentage, double stockWorth) {
         this.symbol = symbol;
         this.currentPrice = currentPrice;
         this.priceChangePercentage = priceChangePercentage;

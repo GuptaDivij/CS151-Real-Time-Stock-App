@@ -58,6 +58,7 @@
             <artifactId>realtime_stock_app</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
         <!-- Maven dependency -->
 
 

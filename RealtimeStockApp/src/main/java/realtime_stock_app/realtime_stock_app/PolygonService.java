@@ -5,6 +5,8 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+
+
 public class PolygonService {
 
 
@@ -22,6 +24,7 @@ public class PolygonService {
         for(String s: arr){
             System.out.println(s);
         }
+        System.out.println(arr[6]);
     }
 
 }
