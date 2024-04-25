@@ -10,11 +10,12 @@ public class MongoDB {
         mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
         database = mongoClient.getDB("StockAppUsers");
         users = database.getCollection("Users");
-
+        User newUser = new User("ABCD", "hello", "world");
+        users.insert(convert(new Portfolio(), newUser));
     }
 
-    public static DBObject convert(Portfolio portfolio, Stock stock) {
-        return new BasicDBObject("User", "TODO: Add userID").append("Portfolio", portfolio.getPortfolio());
+    public static DBObject convert(Portfolio portfolio, User user) {
+        return new BasicDBObject("User", user.getUserID()).append("Portfolio", portfolio.getPortfolio());
     }
 }
 

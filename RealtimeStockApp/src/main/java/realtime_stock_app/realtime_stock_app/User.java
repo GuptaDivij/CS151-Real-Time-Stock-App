@@ -1,26 +1,25 @@
 package realtime_stock_app.realtime_stock_app;
 
+import com.mongodb.*;
+
 import java.io.IOException;
 
+import static realtime_stock_app.realtime_stock_app.MongoDB.*;
+
 public class User{
-    private String userID;
+    private final String userID;
     private String usrname;
     private String usrpwd;
-    private String email;
 
-    public User(String userID, String usrname, String usrpwd, String email) {
+    public User(String userID, String usrname, String usrpwd) {
         this.userID = userID;
         this.usrname = usrname;
         this.usrpwd = usrpwd;
-        this.email = email;
+        users.insert(new BasicDBObject("User ID", this.userID).append("Username", this.usrname).append("Password", this.usrpwd));
     }
 
     public String getUserID() {
         return userID;
-    }
-
-    public void setUserID(String userID) {
-        this.userID = userID;
     }
 
     public String getUsrname() {
@@ -39,14 +38,6 @@ public class User{
         this.usrpwd = usrpwd;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     //methods
 
     public void buy(int quantity, String stock) throws IOException, InterruptedException {
@@ -59,13 +50,21 @@ public class User{
     }
 
     public boolean login(String usrname, String usrpwd){
-        //update
-        return true;
+        DBObject query = new BasicDBObject("User ID", this.userID);
+        DBCursor cursor = users.find(query);
+        return usrname.equals(cursor.one().get("Username")) && usrpwd.equals(cursor.one().get("Password"));
+
     }
 
     public void logout(){
 
     }
 
-
+    public static void main(String[] args) {
+        mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
+        database = mongoClient.getDB("StockAppUsers");
+        users = database.getCollection("Users");
+        User newUser = new User("ABCD", "hello", "world");
+        System.out.println(newUser.login("hello", "world"));
+    }
 }
