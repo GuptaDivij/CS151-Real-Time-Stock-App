@@ -1,5 +1,7 @@
 package realtime_stock_app.realtime_stock_app;
 
+import java.io.IOException;
+
 public class Stock {
     private String symbol;
     private double currentPrice;
@@ -12,10 +14,20 @@ public class Stock {
      * @param currentPrice The current trading price of the stock.
      * @param priceChangePercentage The percentage change in price of the stock.
      */
-    public Stock(String symbol, double currentPrice, double priceChangePercentage) {
+    public Stock(String symbol) throws IOException, InterruptedException {
         this.symbol = symbol;
-        this.currentPrice = currentPrice;
-        this.priceChangePercentage = priceChangePercentage;
+        this.currentPrice = getCurrentPrice(symbol);
+        this.priceChangePercentage = getPriceChange(symbol);
+    }
+
+    private double getCurrentPrice(String symbol) throws IOException, InterruptedException {
+        double[] close = PolygonService.getPriceInfo(symbol);
+        return close[1];
+    }
+
+    public double getPriceChange(String symbol) throws IOException, InterruptedException {
+        double[] array = PolygonService.getPriceInfo(symbol);
+        return (array[1] - array[0]) / array[0];
     }
 
     // Getters
