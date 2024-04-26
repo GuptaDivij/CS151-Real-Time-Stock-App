@@ -58,7 +58,7 @@ public class User{
         // double stockWorth = quantity * thePrice;
         double priceChange = (thePrice - openPrice) / openPrice;
 
-        portfolio.addStocks(new Stock(stockTicker, thePrice, priceChange), quantity);
+        portfolio.addStocks(new Stock(stockTicker), quantity);
 
     }
     public void sell(int quantity, Stock stock){
