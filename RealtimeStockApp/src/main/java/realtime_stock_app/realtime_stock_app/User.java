@@ -6,7 +6,6 @@ public class User{
     private String userID;
     private String username;
     private String userpwd;
-    private String email;
     private Portfolio portfolio;
     public User(String userID, String usrname, String usrpwd) {
         this.userID = userID;
@@ -37,14 +36,6 @@ public class User{
 
     public void setUsrpwd(String usrpwd) {
         this.userpwd = usrpwd;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     //methods
