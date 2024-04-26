@@ -102,7 +102,6 @@ public class StockFrontEnd extends Application {
             String username = usernameField.getText();
             String password = passwordField.getText();
             String passwordAlert = isPasswordValid(password);
-            String emailAlert = "Email is invalid";
 
             // Check password requirements
             if (!passwordAlert.isEmpty()) {
@@ -249,9 +248,6 @@ public class StockFrontEnd extends Application {
         return !password.matches("[A-Za-z0-9 ]*");
     }
 
-    public boolean isEmailValid(String email) {
-        return email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
-    }
 
     public String generateUserID(String firstName, String lastName) {
         Random random = new Random();
