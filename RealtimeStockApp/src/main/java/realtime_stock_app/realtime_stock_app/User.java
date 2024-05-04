@@ -17,19 +17,19 @@ public class User{
     }
 
 
-    public String getUsrname() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsrname(String usrname) {
+    public void setUsername(String usrname) {
         this.username = usrname;
     }
 
-    public String getUsrpwd() {
+    public String getPassword() {
         return userpwd;
     }
 
-    public void setUsrpwd(String usrpwd) {
+    public void setPassword(String usrpwd) {
         this.userpwd = usrpwd;
     }
 

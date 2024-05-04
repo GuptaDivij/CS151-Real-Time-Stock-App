@@ -18,6 +18,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.JSONArray;
+import org.json.simple.parser.ParseException;
+
 import java.io.FileReader;
 import java.util.Random;
 
@@ -84,16 +86,6 @@ public class StockSignUpController {
         return !password.matches("[A-Za-z0-9 ]*");
     }
 
-
-    public String generateUserID(String firstName, String lastName) {
-        Random random = new Random();
-        StringBuilder username = new StringBuilder((firstName.charAt(0) + "" + lastName.charAt(0)).toUpperCase() + "-");
-        for (int i = 0; i < 4; i++) {
-            username.append(random.nextInt(10));
-        }
-        return username.toString();
-    }
-
     public void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -116,22 +108,22 @@ public class StockSignUpController {
         showAlert(title, "Password does not meet the following requirement:\n" + missingRequirement);
     }
 
-    public void handleSignUp(MouseEvent mouseEvent) throws IOException, JSONException {
-
-        if(firstName.getText().isEmpty()) {
-            showAlert("Alert", "Please make sure that you put your first name.");
+    public void handleSignUp(MouseEvent mouseEvent) throws IOException {
+        // Input validation logic...
+        if (firstName.getText().isEmpty()) {
+            showAlert("Error", "Please fill out the first name field.");
             return;
         }
-        if(lastName.getText().isEmpty()) {
-            showAlert("Alert", "Please make sure that you put your last name.");
+        if (lastName.getText().isEmpty()) {
+            showAlert("Error", "Please fill out the last name field.");
             return;
         }
-        if(username.getText().isEmpty()) {
-            showAlert("Alert", "Please make sure that you have a username.");
+        if (username.getText().isEmpty()) {
+            showAlert("Error", "Please fill out the username field.");
             return;
         }
-        if(password.getText().isEmpty()) {
-            showAlert("Alert", "Please make sure that have a password.");
+        if (isUsernameExists(username.getText())) {
+            showAlert("Error", "Username already exists. Please choose a different one.");
             return;
         }
 
@@ -139,33 +131,29 @@ public class StockSignUpController {
 
         // Check password requirements
         if (!passwordAlert.isEmpty()) {
-
             showAlertWithPasswordRequirements("Error", passwordAlert);
             return;
         }
 
-        // Generate username
-        String userID = generateUserID(firstName.getText(), lastName.getText());
-
         // Store user information
         User user = new User(firstName.getText(), lastName.getText(), username.getText(), password.getText());
-        if (isUsernameExists(user.getUsrname())) {
-            System.out.println("Username already exists. Please choose a different one.");
-            // Throw an error or handle it accordingly
+
+        try {
+            // Read JSON file...
+            JSONArray jsonArray = readJsonFile();
+
+            // Create user JSON object...
+            JSONObject userObj = createUserJsonObject(user);
+
+            // Write to JSON file...
+            writeToJsonFile(jsonArray, userObj);
+        } catch (ParseException | IOException | JSONException e) {
+            System.out.println(e.getMessage());
+            handleFileError(e);
             return;
         }
-        JSONObject objItem =  new JSONObject();
-        objItem.put("first name", user.getFirstName());
-        objItem.put("last name",  user.getLastName());
-        objItem.put("username",  user.getUsrname());
-        objItem.put("password",  user.getUsrpwd());
 
-        try (FileWriter writer = new FileWriter("C:\\Users\\musta\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json")) {
-            writer.write(objItem.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        // Navigate to login screen...
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("StockLogin.fxml"));
         root = loginLoader.load();
         stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
@@ -174,26 +162,59 @@ public class StockSignUpController {
         stage.show();
     }
 
-    private boolean isUsernameExists(String usrname) {
-        try (FileReader reader = new FileReader("C:\\Users\\musta\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json")) {
-            JSONParser jsonParser = new JSONParser();
-            JSONArray jsonArray = (JSONArray) jsonParser.parse(reader);
+    private JSONArray readJsonFile() throws IOException, ParseException {
+        JSONParser jsonParser = new JSONParser();
+        try (FileReader reader = new FileReader("C:\\Users\\ved-j\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json")) {
+            Object object = jsonParser.parse(reader);
+            return (JSONArray) object;
+        }
+    }
+
+    private JSONObject createUserJsonObject(User user) throws JSONException {
+        JSONObject userObj = new JSONObject();
+        JSONObject objItem = new JSONObject();
+        objItem.put("first name", user.getFirstName());
+        objItem.put("last name", user.getLastName());
+        objItem.put("username", user.getUsername());
+        objItem.put("password", user.getPassword());
+        userObj.put(user.getUsername(), objItem);
+        return userObj;
+    }
+
+    private void writeToJsonFile(JSONArray jsonArray, JSONObject userObj) throws IOException {
+        jsonArray.add(userObj);
+        try (FileWriter file = new FileWriter("C:\\Users\\ved-j\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json")) {
+            file.write(jsonArray.toJSONString());
+        }
+    }
+
+    private void handleFileError(Exception e) {
+        showAlert("Failure", "Something went wrong. Please try again later.");
+    }
+
+    private boolean isUsernameExists(String username) {
+        JSONParser jsonParser = new JSONParser();
+        try (FileReader reader = new FileReader("C:\\Users\\ved-j\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json")) {
+            Object object = jsonParser.parse(reader);
+            JSONArray jsonArray = (JSONArray) object;
 
             // Iterate over existing users and check if username exists
             for (Object obj : jsonArray) {
-                JSONObject userObj = (JSONObject) obj;
-                String existingUsername = (String) userObj.get("username");
-                if (existingUsername.equals(username)) {
+                org.json.simple.JSONObject userObj = (org.json.simple.JSONObject) obj;
+                System.out.println(userObj);
+                org.json.simple.JSONObject existingUser = (org.json.simple.JSONObject) userObj.get(username);
+                if (existingUser == null) {
+                    continue; // Username exists
+                }
+                String existingUsername = (String) existingUser.get("username");
+                System.out.println(existingUsername);
+                if (existingUsername != null && existingUsername.equals(username)) {
                     return true; // Username exists
                 }
             }
-        } catch (IOException | org.json.simple.parser.ParseException e) {
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
-
-        return false; // Username doesn't exist
-    } catch (JSONException e) {
-            throw new RuntimeException(e);
         }
-        return false;
+        return false; // Username doesn't exist or error occurred
     }
 }
