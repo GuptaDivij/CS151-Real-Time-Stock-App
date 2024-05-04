@@ -114,8 +114,8 @@ public class StockFrontEnd extends Application {
             String userID = generateUserID(firstName, lastName);
 
             // Store user information
-            User user = new User(userID, username, password);
-            users.add(user);
+            //User user = new User(userID, username, password);
+            //users.add(user);
 
             // Show username to the user
             showAlert("Success", "Signup successful!\nYour username is: " + username);
