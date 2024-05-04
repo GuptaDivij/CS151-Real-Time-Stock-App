@@ -12,8 +12,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
-
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.io.FileWriter;
 import java.io.IOException;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.JSONArray;
+import java.io.FileReader;
 import java.util.Random;
 
 public class StockSignUpController {
@@ -79,6 +84,16 @@ public class StockSignUpController {
         return !password.matches("[A-Za-z0-9 ]*");
     }
 
+
+    public String generateUserID(String firstName, String lastName) {
+        Random random = new Random();
+        StringBuilder username = new StringBuilder((firstName.charAt(0) + "" + lastName.charAt(0)).toUpperCase() + "-");
+        for (int i = 0; i < 4; i++) {
+            username.append(random.nextInt(10));
+        }
+        return username.toString();
+    }
+
     public void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -101,7 +116,7 @@ public class StockSignUpController {
         showAlert(title, "Password does not meet the following requirement:\n" + missingRequirement);
     }
 
-    public void handleSignUp(MouseEvent mouseEvent) throws IOException {
+    public void handleSignUp(MouseEvent mouseEvent) throws IOException, JSONException {
 
         if(firstName.getText().isEmpty()) {
             showAlert("Alert", "Please make sure that you put your first name.");
@@ -129,8 +144,27 @@ public class StockSignUpController {
             return;
         }
 
+        // Generate username
+        String userID = generateUserID(firstName.getText(), lastName.getText());
+
         // Store user information
         User user = new User(firstName.getText(), lastName.getText(), username.getText(), password.getText());
+        if (isUsernameExists(user.getUsrname())) {
+            System.out.println("Username already exists. Please choose a different one.");
+            // Throw an error or handle it accordingly
+            return;
+        }
+        JSONObject objItem =  new JSONObject();
+        objItem.put("first name", user.getFirstName());
+        objItem.put("last name",  user.getLastName());
+        objItem.put("username",  user.getUsrname());
+        objItem.put("password",  user.getUsrpwd());
+
+        try (FileWriter writer = new FileWriter("C:\\Users\\musta\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json")) {
+            writer.write(objItem.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("StockLogin.fxml"));
         root = loginLoader.load();
@@ -138,5 +172,28 @@ public class StockSignUpController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    private boolean isUsernameExists(String usrname) {
+        try (FileReader reader = new FileReader("C:\\Users\\musta\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json")) {
+            JSONParser jsonParser = new JSONParser();
+            JSONArray jsonArray = (JSONArray) jsonParser.parse(reader);
+
+            // Iterate over existing users and check if username exists
+            for (Object obj : jsonArray) {
+                JSONObject userObj = (JSONObject) obj;
+                String existingUsername = (String) userObj.get("username");
+                if (existingUsername.equals(username)) {
+                    return true; // Username exists
+                }
+            }
+        } catch (IOException | org.json.simple.parser.ParseException e) {
+            e.printStackTrace();
+
+        return false; // Username doesn't exist
+    } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
     }
 }
