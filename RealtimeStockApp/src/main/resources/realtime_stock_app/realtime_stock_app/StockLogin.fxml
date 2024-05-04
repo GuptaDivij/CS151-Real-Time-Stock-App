@@ -10,16 +10,16 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="realtime_stock_app.realtime_stock_app.StockLoginController">
    <children>
-      <TextField layoutX="295.0" layoutY="155.0" />
+      <TextField fx:id="usernameField" layoutX="295.0" layoutY="155.0" />
       <Text layoutX="200.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" />
-      <TextField layoutX="295.0" layoutY="221.0" />
+      <TextField fx:id="passwordField" layoutX="295.0" layoutY="221.0" />
       <Text layoutX="200.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" />
       <Text layoutX="263.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" textAlignment="CENTER">
          <font>
             <Font name="Segoe UI" size="30.0" />
          </font>
       </Text>
-      <Button layoutX="277.0" layoutY="300.0" mnemonicParsing="false" style="-fx-background-color: F28963; -fx-background-radius: 5;" text="Login" textFill="WHITE" />
+      <Button onMouseClicked="#handleLogin" layoutX="277.0" layoutY="300.0" mnemonicParsing="false" style="-fx-background-color: F28963; -fx-background-radius: 5;" text="Login" textFill="WHITE" />
       <ImageView fitHeight="87.0" fitWidth="84.0" layoutX="515.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@StockifyLogo.png" />
