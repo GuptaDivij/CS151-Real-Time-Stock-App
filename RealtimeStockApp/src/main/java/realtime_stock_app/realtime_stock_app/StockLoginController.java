@@ -74,6 +74,7 @@ public class StockLoginController {
         // Check if username and password match
         if(!isUserExists(username, password)) {
             showAlert("Error", "Please enter the correct credentials or go to sign up.");
+            return;
         }
 
             FXMLLoader portfolioLoader = new FXMLLoader(getClass().getResource("StockPortfolio.fxml"));
@@ -94,14 +95,14 @@ public class StockLoginController {
             for (Object obj : jsonArray) {
                 org.json.simple.JSONObject userObj = (org.json.simple.JSONObject) obj;
                 org.json.simple.JSONObject existingUser = (org.json.simple.JSONObject) userObj.get(username);
-                if (existingUser == null) {
-                    showAlert("Error","Please input the right credentials"); // Username exists
+                if(existingUser != null) {
+                    String usernameText = (String) existingUser.get("username");
+                    String passwordText = (String) existingUser.get("password");
+                    if(password.equals(passwordText) && username.equals(usernameText)) {
+                        return true;
+                    }
                 }
-                String usernameText = (String) existingUser.get("username");
-                String passwordText = (String) existingUser.get("password");
-                if (password.equals(passwordText) && username.equals(usernameText)) {
-                    return true; // Username exists
-                }
+
             }
         } catch (IOException | ParseException e) {
             e.printStackTrace();
