@@ -3,24 +3,19 @@ package realtime_stock_app.realtime_stock_app;
 import java.io.IOException;
 
 public class User{
-    private String userID;
+    private String firstName;
+    private String lastName;
     private String username;
     private String userpwd;
     private Portfolio portfolio;
-    public User(String userID, String usrname, String usrpwd) {
-        this.userID = userID;
+    public User(String firstName, String lastName, String usrname, String usrpwd) {
         this.username = usrname;
         this.userpwd = usrpwd;
+        this.lastName = lastName;
+        this.firstName = firstName;
         portfolio = new Portfolio();
     }
 
-    public String getUserID() {
-        return userID;
-    }
-
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
 
     public String getUsrname() {
         return username;
@@ -38,7 +33,22 @@ public class User{
         this.userpwd = usrpwd;
     }
 
-    //methods
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+//methods
 
     public void buy(int quantity, String stockTicker) throws IOException, InterruptedException {
 
@@ -65,11 +75,7 @@ public class User{
 
     }
 
-    public static void main(String[] args){
-        User test = new User("123", "Nish", "pwd");
-        //test.buy(2, "AAPL");
 
-    }
 
 
 }

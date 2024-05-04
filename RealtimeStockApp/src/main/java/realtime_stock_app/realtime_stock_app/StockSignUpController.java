@@ -143,7 +143,7 @@ public class StockSignUpController {
         String userID = generateUserID(firstName.getText(), lastName.getText());
 
         // Store user information
-        User user = new User(userID, username.getText(), password.getText());
+        User user = new User(firstName.getText(), lastName.getText(), username.getText(), password.getText());
 
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("StockLogin.fxml"));
         root = loginLoader.load();
