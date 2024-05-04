@@ -29,7 +29,7 @@
             <Image url="@StockifyLogo.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="40.0" fitWidth="41.0" layoutX="6.0" layoutY="13.0" onMouseClicked="#handleWelcomeOpen" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="40.0" fitWidth="41.0" layoutX="6.0" layoutY="13.0" onMouseClicked="#handleBackButton" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@BackButton.jpg" />
          </image>

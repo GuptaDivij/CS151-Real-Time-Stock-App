@@ -29,7 +29,7 @@ public class StockSignUpController {
     @FXML
     private TextField password;
 
-    public void handleWelcomeOpen(MouseEvent mouseEvent) throws IOException {
+    public void handleBackButton(MouseEvent mouseEvent) throws IOException {
         FXMLLoader welcomeLoader = new FXMLLoader(getClass().getResource("StockWelcome.fxml"));
         root = welcomeLoader.load();
         stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
