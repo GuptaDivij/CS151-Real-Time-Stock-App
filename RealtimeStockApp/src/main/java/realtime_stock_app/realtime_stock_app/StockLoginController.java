@@ -5,11 +5,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 import org.bson.json.JsonParseException;
 import org.json.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -32,13 +39,42 @@ public class StockLoginController {
         stage.show();
     }
 
+    public void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+
+        // Set the content text
+        Label label = new Label(message);
+        label.setWrapText(true); // Allow text to wrap
+        label.setMaxWidth(Double.MAX_VALUE);
+        GridPane.setVgrow(label, Priority.ALWAYS);
+        alert.getDialogPane().setContent(label);
+
+        // Set the size of the dialog
+        alert.getDialogPane().setPrefSize(400, 200); // Set the preferred size as needed
+
+        alert.showAndWait();
+    }
+
 
     public void handleLogin(MouseEvent mouseEvent) throws IOException {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
+        if (username.isEmpty()) {
+            showAlert("Error", "Please fill out the username field.");
+            return;
+        }
+
+        if (password.isEmpty()) {
+            showAlert("Error", "Please fill out the password field.");
+            return;
+        }
         // Check if username and password match
-        boolean loggedIn = false;
+        if(!isUserExists(username, password)) {
+            showAlert("Error", "Please enter the correct credentials or go to sign up.");
+        }
 
             FXMLLoader portfolioLoader = new FXMLLoader(getClass().getResource("StockPortfolio.fxml"));
             root = portfolioLoader.load();
@@ -46,5 +82,30 @@ public class StockLoginController {
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
+    }
+
+    private boolean isUserExists(String username, String password) {
+        JSONParser jsonParser = new JSONParser();
+        try (FileReader reader = new FileReader("C:\\Users\\ved-j\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json")) {
+            Object object = jsonParser.parse(reader);
+            JSONArray jsonArray = (JSONArray) object;
+
+            // Iterate over existing users and check if username exists
+            for (Object obj : jsonArray) {
+                org.json.simple.JSONObject userObj = (org.json.simple.JSONObject) obj;
+                org.json.simple.JSONObject existingUser = (org.json.simple.JSONObject) userObj.get(username);
+                if (existingUser == null) {
+                    showAlert("Error","Please input the right credentials"); // Username exists
+                }
+                String usernameText = (String) existingUser.get("username");
+                String passwordText = (String) existingUser.get("password");
+                if (password.equals(passwordText) && username.equals(usernameText)) {
+                    return true; // Username exists
+                }
+            }
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+        return false; // Username doesn't exist or error occurred
     }
 }

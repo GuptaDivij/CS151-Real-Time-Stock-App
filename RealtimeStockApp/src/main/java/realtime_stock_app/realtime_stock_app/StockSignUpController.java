@@ -122,6 +122,11 @@ public class StockSignUpController {
             showAlert("Error", "Please fill out the username field.");
             return;
         }
+
+        if (password.getText().isEmpty()) {
+            showAlert("Error", "Please fill out the password field.");
+            return;
+        }
         if (isUsernameExists(username.getText())) {
             showAlert("Error", "Username already exists. Please choose a different one.");
             return;
@@ -201,13 +206,11 @@ public class StockSignUpController {
             // Iterate over existing users and check if username exists
             for (Object obj : jsonArray) {
                 org.json.simple.JSONObject userObj = (org.json.simple.JSONObject) obj;
-                System.out.println(userObj);
                 org.json.simple.JSONObject existingUser = (org.json.simple.JSONObject) userObj.get(username);
                 if (existingUser == null) {
                     continue; // Username exists
                 }
                 String existingUsername = (String) existingUser.get("username");
-                System.out.println(existingUsername);
                 if (existingUsername != null && existingUsername.equals(username)) {
                     return true; // Username exists
                 }
