@@ -79,16 +79,6 @@ public class StockSignUpController {
         return !password.matches("[A-Za-z0-9 ]*");
     }
 
-
-    public String generateUserID(String firstName, String lastName) {
-        Random random = new Random();
-        StringBuilder username = new StringBuilder((firstName.charAt(0) + "" + lastName.charAt(0)).toUpperCase() + "-");
-        for (int i = 0; i < 4; i++) {
-            username.append(random.nextInt(10));
-        }
-        return username.toString();
-    }
-
     public void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -138,9 +128,6 @@ public class StockSignUpController {
             showAlertWithPasswordRequirements("Error", passwordAlert);
             return;
         }
-
-        // Generate username
-        String userID = generateUserID(firstName.getText(), lastName.getText());
 
         // Store user information
         User user = new User(firstName.getText(), lastName.getText(), username.getText(), password.getText());

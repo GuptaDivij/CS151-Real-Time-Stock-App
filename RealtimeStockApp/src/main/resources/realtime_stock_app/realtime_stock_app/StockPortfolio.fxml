@@ -4,19 +4,27 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21">
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
-            <TextField layoutX="83.0" layoutY="32.0" prefHeight="0.0" prefWidth="98.0" />
-            <Button layoutX="100.0" layoutY="73.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="64.0" text="Search" />
-            <Text layoutX="83.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Find Your Stocks" wrappingWidth="129.9830722808838" />
+            <TextField layoutX="14.0" layoutY="59.0" prefHeight="26.0" prefWidth="162.0" />
+            <Button layoutX="197.0" layoutY="57.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="64.0" style="-fx-background-color: F28963; -fx-background-radius: 5;" text="Search" textFill="WHITE" />
+            <Text layoutX="89.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stock Search" wrappingWidth="117.18302345275879">
+               <font>
+                  <Font name="Segoe UI" size="20.0" />
+               </font></Text>
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="401.0">
          <children>
-            <Text layoutX="81.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Owned Stocks" wrappingWidth="150.9830722808838" />
+            <Text layoutX="85.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Portfolio" wrappingWidth="125.18302345275879">
+               <font>
+                  <Font name="Segoe UI" size="20.0" />
+               </font>
+            </Text>
          </children></AnchorPane>
   </items>
 </SplitPane>
