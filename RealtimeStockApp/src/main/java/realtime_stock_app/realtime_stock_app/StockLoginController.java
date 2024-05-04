@@ -85,7 +85,7 @@ public class StockLoginController {
 
     private boolean isUserExists(String username, String password) {
         JSONParser jsonParser = new JSONParser();
-        try (FileReader reader = new FileReader("C:\\Users\\ved-j\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json")) {
+        try (FileReader reader = new FileReader("C:\\Users\\musta\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json")) {
             Object object = jsonParser.parse(reader);
             JSONArray jsonArray = (JSONArray) object;
 

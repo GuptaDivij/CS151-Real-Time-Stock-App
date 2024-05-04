@@ -25,8 +25,6 @@ import java.util.Random;
 
 public class StockSignUpController {
     private Stage stage;
-    private String fileName = "C:\\Users\\ved-j\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json";
-    //private String fileName = "C:\\Users\\musta\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json";
     private Scene scene;
     private Parent root;
     @FXML
@@ -171,7 +169,7 @@ public class StockSignUpController {
 
     private JSONArray readJsonFile() throws IOException, ParseException {
         JSONParser jsonParser = new JSONParser();
-        try (FileReader reader = new FileReader(fileName)) {
+        try (FileReader reader = new FileReader("C:\\Users\\ved-j\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json")) {
             Object object = jsonParser.parse(reader);
             return (JSONArray) object;
         }
@@ -190,7 +188,7 @@ public class StockSignUpController {
 
     private void writeToJsonFile(JSONArray jsonArray, JSONObject userObj) throws IOException {
         jsonArray.add(userObj);
-        try (FileWriter file = new FileWriter(fileName)) {
+        try (FileWriter file = new FileWriter("C:\\Users\\ved-j\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json")) {
             file.write(jsonArray.toJSONString());
         }
     }
@@ -201,7 +199,7 @@ public class StockSignUpController {
 
     private boolean isUsernameExists(String username) {
         JSONParser jsonParser = new JSONParser();
-        try (FileReader reader = new FileReader(fileName)) {
+        try (FileReader reader = new FileReader("C:\\Users\\ved-j\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json")) {
             Object object = jsonParser.parse(reader);
             JSONArray jsonArray = (JSONArray) object;
 
