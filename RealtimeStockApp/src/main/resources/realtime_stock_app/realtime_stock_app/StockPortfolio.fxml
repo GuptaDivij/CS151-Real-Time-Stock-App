@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.gluonhq.charm.glisten.control.CardPane?>
+<?import com.gluonhq.charm.glisten.control.Icon?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -12,11 +16,25 @@
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
             <TextField fx:id="searchBar" layoutX="14.0" layoutY="59.0" prefHeight="26.0" prefWidth="162.0" />
-            <Button onMouseClicked="#handleStockSearch" layoutX="197.0" layoutY="57.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="64.0" style="-fx-background-color: F28963; -fx-background-radius: 5;" text="Search" textFill="WHITE" />
+            <Button layoutX="197.0" layoutY="57.0" mnemonicParsing="false" onMouseClicked="#handleStockSearch" prefHeight="30.0" prefWidth="64.0" style="-fx-background-color: F28963; -fx-background-radius: 5;" text="Search" textFill="WHITE" />
             <Text layoutX="89.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stock Search" wrappingWidth="117.18302345275879">
                <font>
                   <Font name="Segoe UI" size="20.0" />
                </font></Text>
+            <CardPane fx:id="stockCard" layoutX="17.0" layoutY="100.0" prefHeight="110.0" prefWidth="156.0" visible="false">
+               <HBox alignment="CENTER" prefHeight="27.0" prefWidth="140.0">
+                  <children>
+                     <Label fx:id="stockName" text="Label" />
+                  </children>
+               </HBox>
+               <HBox alignment="CENTER" prefHeight="45.0" prefWidth="140.0">
+                  <children>
+                     <Label fx:id="stockPrice" prefHeight="73.0" prefWidth="69.0" style="-fx-padding:10;" text="label1" />
+                     <Icon fx:id="addStock" content="ADD" prefHeight="73.0" prefWidth="55.0" />
+                  </children>
+               </HBox>
+            </CardPane>
+            <Text fx:id="noResults" layoutX="102.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No Results..." wrappingWidth="90.98307228088379" />
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="401.0">
          <children>
