@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<SplitPane dividerPositions="0.5, 0.5100334448160535" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="realtime_stock_app.realtime_stock_app.StockPortfolioController">
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="realtime_stock_app.realtime_stock_app.StockPortfolioController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
@@ -21,17 +22,16 @@
                <font>
                   <Font name="Segoe UI" size="20.0" />
                </font></Text>
-            <VBox fx:id="stockPane" alignment="TOP_CENTER" layoutX="15.0" layoutY="116.0" prefHeight="134.0"
-                  prefWidth="162.0" style="-fx-background-color: F28963;" visible="false">
+            <VBox fx:id="stockPane" alignment="TOP_CENTER" layoutX="15.0" layoutY="116.0" prefHeight="134.0" prefWidth="162.0" style="-fx-background-color: F28963;" visible="false">
                <children>
                   <HBox alignment="CENTER" prefHeight="50.0" prefWidth="149.0">
                      <children>
-                        <Text fx:id="stockTicker" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="27.98307228088379" />
+                        <Text fx:id="stockTicker" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="34.98307228088379" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="118.0" prefWidth="149.0">
                      <children>
-                        <Text fx:id="stockPrice" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="31.98307228088379" />
+                        <Text fx:id="stockPrice" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="54.98307228088379" />
                         <ImageView fx:id="addButton" fitHeight="97.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@plus_button.png" />
@@ -45,12 +45,32 @@
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="401.0">
          <children>
-            <Text layoutX="85.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Portfolio" wrappingWidth="125.18302345275879">
+            <Text layoutX="109.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Portfolio" wrappingWidth="77.98307228088379">
                <font>
                   <Font name="Segoe UI" size="20.0" />
                </font>
             </Text>
+            <VBox fx:id="stockOnPortfolio" alignment="TOP_CENTER" layoutX="81.0" layoutY="51.0" prefHeight="86.0" prefWidth="134.0" style="-fx-background-color: F28963;" visible="false">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="149.0">
+                     <children>
+                        <Text fx:id="stockTicker1" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="34.98307228088379" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="57.0" prefWidth="134.0">
+                     <children>
+                        <Text fx:id="stockPrice1" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="37.98307228088379" />
+                        <Spinner fx:id="stockQuantity" prefHeight="26.0" prefWidth="50.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="38.0" prefWidth="134.0">
+                     <children>
+                        <Text fx:id="buy" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="34.98307228088379" />
+                        <Text fx:id="sell" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="34.98307228088379" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children></AnchorPane>
-      <HBox prefHeight="100.0" prefWidth="200.0" />
   </items>
 </SplitPane>
