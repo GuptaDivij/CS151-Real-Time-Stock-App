@@ -72,7 +72,7 @@
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>charm-glisten</artifactId>
-            <version>6.0.7</version> <!-- or the latest version available -->
+            <version>6.1.0</version> <!-- or the latest version available -->
         </dependency>
         <!-- Maven dependency -->
 

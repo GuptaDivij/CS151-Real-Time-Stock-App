@@ -11,6 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.layout.StackPane?>
 <SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="realtime_stock_app.realtime_stock_app.StockPortfolioController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -21,19 +22,22 @@
                <font>
                   <Font name="Segoe UI" size="20.0" />
                </font></Text>
-            <CardPane fx:id="stockCard" layoutX="17.0" layoutY="100.0" prefHeight="110.0" prefWidth="156.0" visible="false">
-               <HBox alignment="CENTER" prefHeight="27.0" prefWidth="140.0">
-                  <children>
-                     <Label fx:id="stockName" text="Label" />
-                  </children>
-               </HBox>
-               <HBox alignment="CENTER" prefHeight="45.0" prefWidth="140.0">
-                  <children>
-                     <Label fx:id="stockPrice" prefHeight="73.0" prefWidth="69.0" style="-fx-padding:10;" text="label1" />
-                     <Icon fx:id="addStock" content="ADD" prefHeight="73.0" prefWidth="55.0" />
-                  </children>
-               </HBox>
-            </CardPane>
+             <StackPane>
+                 <CardPane fx:id="stockCard" layoutX="17.0" layoutY="100.0" prefHeight="110.0" prefWidth="156.0" visible="false">
+                     <HBox alignment="CENTER" prefHeight="27.0" prefWidth="140.0">
+                         <children>
+                             <Label fx:id="stockName" text="Label" />
+                         </children>
+                     </HBox>
+                     <HBox alignment="CENTER" prefHeight="45.0" prefWidth="140.0">
+                         <children>
+                             <Label fx:id="stockPrice" prefHeight="73.0" prefWidth="69.0" style="-fx-padding:10;" text="label1" />
+                             <Icon fx:id="addStock" content="ADD" prefHeight="73.0" prefWidth="55.0" />
+                         </children>
+                     </HBox>
+                 </CardPane>
+             </StackPane>
+
             <Text fx:id="noResults" layoutX="102.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No Results..." wrappingWidth="90.98307228088379" />
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="401.0">
