@@ -5,7 +5,7 @@ module realtime_stock_app.realtime_stock_app {
     requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
     requires java.net.http;
-    requires mongo.java.driver;
+
     requires json;
     requires json.simple;
 
