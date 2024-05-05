@@ -21,7 +21,7 @@ public class StockPortfolioController {
 
         //if stock exists make stockPane visible and no reults invisible
 
-
+        //display
         //display latest stock price and price change and give option to "+" (add) to portfolio (right side of the scene)
 
         boolean stockExists = stockExists(stockTicker);
