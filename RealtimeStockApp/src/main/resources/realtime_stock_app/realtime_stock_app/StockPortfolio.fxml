@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.gluonhq.charm.glisten.control.CardPane?>
-<?import com.gluonhq.charm.glisten.control.Icon?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.layout.StackPane?>
-<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="realtime_stock_app.realtime_stock_app.StockPortfolioController">
+<SplitPane dividerPositions="0.5, 0.5100334448160535" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="realtime_stock_app.realtime_stock_app.StockPortfolioController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
@@ -22,31 +21,35 @@
                <font>
                   <Font name="Segoe UI" size="20.0" />
                </font></Text>
-             <StackPane>
-                 <CardPane fx:id="stockCard" layoutX="17.0" layoutY="100.0" prefHeight="110.0" prefWidth="156.0" visible="false">
-                     <HBox alignment="CENTER" prefHeight="27.0" prefWidth="140.0">
-                         <children>
-                             <Label fx:id="stockName" text="Label" />
-                         </children>
-                     </HBox>
-                     <HBox alignment="CENTER" prefHeight="45.0" prefWidth="140.0">
-                         <children>
-                             <Label fx:id="stockPrice" prefHeight="73.0" prefWidth="69.0" style="-fx-padding:10;" text="label1" />
-                             <Icon fx:id="addStock" content="ADD" prefHeight="73.0" prefWidth="55.0" />
-                         </children>
-                     </HBox>
-                 </CardPane>
-             </StackPane>
-
-            <Text fx:id="noResults" layoutX="102.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No Results..." wrappingWidth="90.98307228088379" />
+            <VBox fx:id="stockPane" alignment="TOP_CENTER" layoutX="15.0" layoutY="116.0" prefHeight="134.0" prefWidth="162.0" style="-fx-background-color: F28963;" visible="false">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="149.0">
+                     <children>
+                        <Text fx:id="stockTicker" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="27.98307228088379" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="118.0" prefWidth="149.0">
+                     <children>
+                        <Text fx:id="stockPrice" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="31.98307228088379" />
+                        <ImageView fx:id="addButton" fitHeight="97.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@plus_button.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Text fx:id="noResults" layoutX="70.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No Results..." wrappingWidth="77.98307228088379" />
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="401.0">
          <children>
-            <Text layoutX="85.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Portfolio" wrappingWidth="125.18302345275879">
+            <Text layoutX="85.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Portfolio" wrappingWidth="125.18302345275879">
                <font>
                   <Font name="Segoe UI" size="20.0" />
                </font>
             </Text>
          </children></AnchorPane>
+      <HBox prefHeight="100.0" prefWidth="200.0" />
   </items>
 </SplitPane>
