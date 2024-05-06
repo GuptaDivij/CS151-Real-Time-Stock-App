@@ -53,8 +53,6 @@ public class StockPortfolioController{
     @FXML
     private Text sell;
     @FXML
-    private Spinner<Integer> quantity;
-    @FXML
     private ScrollPane scrollPane;
 
 
@@ -112,7 +110,7 @@ public class StockPortfolioController{
         }
     }
 
-    private void addStockToPortfolio(String stockTicker, String stockPrice) {
+    /**private void addStockToPortfolio(String stockTicker, String stockPrice) {
         VBox stockBox = createStockBox(stockTicker, stockPrice); // Creating a stock box with name and price
         stockOnPortfolio.getChildren().add(stockBox); // Add the stock box to the portfolio
     }
@@ -120,7 +118,7 @@ public class StockPortfolioController{
         quantity.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE));
 
     } **/
-    private VBox createStockBox(String stockTicker, String stockPrice) {
+/**private VBox createStockBox(String stockTicker, String stockPrice) {
         VBox stockBox = new VBox();
         Text stockTickerText = new Text(stockTicker);
         Text stockPriceText = new Text(stockPrice);
@@ -130,10 +128,10 @@ public class StockPortfolioController{
         stockBox.getChildren().addAll(stockTickerText, stockPriceText, actionBox);
         stockBox.setSpacing(10);
         return stockBox;
-    }
+    }**/
 
     public void handleAddToPortfolio(MouseEvent mouseEvent) throws IOException {
-        stockPane.setVisible(false);
+        /**stockPane.setVisible(false);
         noResults.setVisible(true);
         Stage buyStage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("StockBuy.fxml"));
@@ -144,6 +142,7 @@ public class StockPortfolioController{
         addStockToPortfolio(stockTicker.getText(), String.format("$%.2f", priceArr[1]));
 
         // Method to create a VBox for a stock
+        **/
 
     }
 
