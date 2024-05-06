@@ -27,7 +27,7 @@ import java.util.ResourceBundle;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
+import javafx.event.ActionEvent;
 public class StockPortfolioController{
 
     @FXML
@@ -130,7 +130,7 @@ public class StockPortfolioController{
         return stockBox;
     }**/
 
-    public void handleAddToPortfolio(MouseEvent mouseEvent) throws IOException {
+    // void handleAddToPortfolio(MouseEvent mouseEvent) throws IOException {
         /**stockPane.setVisible(false);
         noResults.setVisible(true);
         Stage buyStage = new Stage();
@@ -144,6 +144,23 @@ public class StockPortfolioController{
         // Method to create a VBox for a stock
         **/
 
-    }
+    //}
 
+    public void handleBuyAddButton(MouseEvent mouseEvent) throws IOException {
+        // Load the FXML file
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("StockBuy.fxml"));
+        Parent root = loader.load();
+
+        // Create a new scene
+        Scene scene = new Scene(root);
+
+        // Access the stage
+        Stage stage = new Stage();
+
+        // Set the scene to the stage
+        stage.setScene(scene);
+
+        // Show the stage
+        stage.show();
+    }
 }

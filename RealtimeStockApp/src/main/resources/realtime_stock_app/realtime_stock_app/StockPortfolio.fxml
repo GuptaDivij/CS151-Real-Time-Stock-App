@@ -32,7 +32,7 @@
                   <HBox alignment="CENTER" prefHeight="118.0" prefWidth="149.0">
                      <children>
                         <Text fx:id="stockPrice" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="54.98307228088379" />
-                        <ImageView fx:id="buyAddButton" fitHeight="97.0" fitWidth="32.0" onMouseClicked="#handleAddToPortfolio" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="buyAddButton" fitHeight="97.0" fitWidth="32.0" onMouseClicked="#handleBuyAddButton" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@plus_button.png" />
                            </image>

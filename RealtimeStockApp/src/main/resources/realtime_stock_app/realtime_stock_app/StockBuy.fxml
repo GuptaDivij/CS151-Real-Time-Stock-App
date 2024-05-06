@@ -5,11 +5,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="123.0" prefWidth="493.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="realtime_stock_app.realtime_stock_app.StockBuyController">
+<Pane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="123.0" prefWidth="493.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="realtime_stock_app.realtime_stock_app.StockBuyController">
    <children>
       <Text id="buyStockText" layoutX="14.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How many stocks would you like to buy?" />
-      <TextField id="numStocks" layoutX="254.0" layoutY="49.0" prefHeight="25.0" prefWidth="121.0" />
-      <Button onMouseClicked="#handleBuyStocks" id="buyButton" layoutX="402.0" layoutY="48.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" style="-fx-background-color: F28963; -fx-background-radius: 5;" text="Buy" textFill="WHITE" />
+      <TextField id="numStocks" fx:id="numStocks" layoutX="254.0" layoutY="49.0" prefHeight="25.0" prefWidth="121.0" />
+      <Button id="buyButton" fx:id="buyButton" layoutX="402.0" layoutY="48.0" mnemonicParsing="false" onMouseClicked="#handleBuyStocks" prefHeight="25.0" prefWidth="61.0" style="-fx-background-color: F28963; -fx-background-radius: 5;" text="Buy" textFill="WHITE" />
    </children>
 </Pane>
