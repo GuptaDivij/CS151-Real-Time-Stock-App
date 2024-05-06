@@ -17,14 +17,14 @@ public class PolygonService {
     private static final String API_KEY = "2QwN4O5Ornp3dcPXHp0Id6ygE1wuu2dK";
     public static double[] getPriceInfo(String symbol) throws IOException, InterruptedException {
         // Get the current date
-        LocalDate currentDate = LocalDate.now().minusDays(1);
+        LocalDate currentDate = LocalDate.now();
 
         // Check if the current date is a Saturday or Sunday
         DayOfWeek dayOfWeek = currentDate.getDayOfWeek();
         if (dayOfWeek == DayOfWeek.SATURDAY) {
-            currentDate = currentDate.minusDays(1); // Subtract 1 day if it's Saturday
+            currentDate = currentDate.minusDays(2); // Subtract 1 day if it's Saturday
         } else if (dayOfWeek == DayOfWeek.SUNDAY) {
-            currentDate = currentDate.minusDays(2); // Subtract 2 days if it's Sunday
+            currentDate = currentDate.minusDays(3); // Subtract 2 days if it's Sunday
         }
         String formattedDate = currentDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
         String url = String.format("https://api.polygon.io/v1/open-close/%s/%s?adjusted=true&apiKey=%s", symbol, formattedDate, API_KEY);
