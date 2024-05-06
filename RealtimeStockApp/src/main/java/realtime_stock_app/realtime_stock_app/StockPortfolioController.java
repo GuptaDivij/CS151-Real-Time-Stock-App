@@ -1,6 +1,9 @@
 package realtime_stock_app.realtime_stock_app;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
@@ -21,6 +24,7 @@ import javafx.scene.control.ScrollPane;
 import java.util.ResourceBundle;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class StockPortfolioController{
 
@@ -117,10 +121,14 @@ public class StockPortfolioController{
         quantity.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE));
 
     } **/
-    public void handleAddToPortfolio(MouseEvent mouseEvent) {
+    public void handleAddToPortfolio(MouseEvent mouseEvent) throws IOException {
         stockPane.setVisible(false);
         noResults.setVisible(true);
-
+        Stage buyStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("StockBuy.fxml"));
+        Parent root = loader.load();
+        buyStage.setScene(new Scene(root));
+        buyStage.show();
 
         addStocktoPortfolio(stockTicker.getText(),String.format("$%.2f", priceArr[1]));
 
