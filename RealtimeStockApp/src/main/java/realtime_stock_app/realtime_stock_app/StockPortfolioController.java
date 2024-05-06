@@ -1,4 +1,5 @@
 package realtime_stock_app.realtime_stock_app;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -16,11 +17,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
-import java.net.URL;
-import java.io.IOException;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
@@ -57,70 +59,79 @@ public class StockPortfolioController{
 
 
     private double[] priceArr;
+    
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Initialize UI components or bind data here
+    }
 
     public void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
 
-        // Set the content text
         Label label = new Label(message);
-        label.setWrapText(true); // Allow text to wrap
+        label.setWrapText(true);
         label.setMaxWidth(Double.MAX_VALUE);
         GridPane.setVgrow(label, Priority.ALWAYS);
         alert.getDialogPane().setContent(label);
 
-        // Set the size of the dialog
-        alert.getDialogPane().setPrefSize(400, 200); // Set the preferred size as needed
-
+        alert.getDialogPane().setPrefSize(400, 200);
         alert.showAndWait();
     }
-    public void handleStockSearch(MouseEvent mouseEvent) throws IOException, InterruptedException {
+
+    public void handleStockSearch(MouseEvent mouseEvent) {
         String stockTickerUser = searchBar.getText();
+        boolean stockExists = checkIfStockExists(stockTickerUser); // Check if the stock exists
 
-
-        //if stock exists make stockPane visible and no results invisible
-
-        //display latest stock price and price change and give option to "+" (add) to portfolio (right side of the scene)
-
-        boolean stockExists = checkIfStockExists(stockTickerUser);
-
-        if(stockExists){
+        if (stockExists) {
+            //If stock exists then hide the "no results" text and show the stock pane display stock details
             noResults.setVisible(false);
             stockPane.setVisible(true);
             displayStockDetails(stockTickerUser);
-        }
-        else{
+        } else {
+            // If stock doesn't exist then hide the stock pane and show the "no results" text
             stockPane.setVisible(false);
             noResults.setVisible(true);
         }
     }
 
-    private void displayStockDetails(String stockTickerInput) throws IOException, InterruptedException {
-        if(checkIfStockExists(stockTickerInput)) {
+    private void displayStockDetails(String stockTickerInput) {
+        if (checkIfStockExists(stockTickerInput)) {
             stockTicker.setText(stockTickerInput);
-            stockPrice.setText(String.format("$%.2f",priceArr[1]));
+            stockPrice.setText(String.format("$%.2f", priceArr[1]));
         }
     }
 
     private boolean checkIfStockExists(String stockTicker) {
         try {
-            // Attempt to get price info for the stock
-            priceArr = PolygonService.getPriceInfo(stockTicker);
-            // If getPriceInfo didn't throw an exception, the stock exists
-            return true;
+            priceArr = PolygonService.getPriceInfo(stockTicker); // Getting price information for the stock
+            return true; // Return true if stock exists
         } catch (IOException | InterruptedException e) {
-            // Log the exception (if needed)
-            showAlert("Error", "Stock not found. Please try again.");
-            // If an exception occurred, the stock doesn't exist or there was an issue
-            return false;
+            showAlert("Error", "Stock not found. Please try again."); // Display an alert if stock not found
+            return false; // Return false if stock doesn't exist
         }
     }
 
+    private void addStockToPortfolio(String stockTicker, String stockPrice) {
+        VBox stockBox = createStockBox(stockTicker, stockPrice); // Creating a stock box with name and price
+        stockOnPortfolio.getChildren().add(stockBox); // Add the stock box to the portfolio
+    }
     /** public void initialize(URL url, ResourceBundle resourceBundle){
         quantity.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE));
 
     } **/
+    private VBox createStockBox(String stockTicker, String stockPrice) {
+        VBox stockBox = new VBox();
+        Text stockTickerText = new Text(stockTicker);
+        Text stockPriceText = new Text(stockPrice);
+        Text buyButton = new Text("Buy");
+        Text sellButton = new Text("Sell");
+        HBox actionBox = new HBox(buyButton, sellButton);
+        stockBox.getChildren().addAll(stockTickerText, stockPriceText, actionBox);
+        stockBox.setSpacing(10);
+        return stockBox;
+    }
+    
     public void handleAddToPortfolio(MouseEvent mouseEvent) throws IOException {
         stockPane.setVisible(false);
         noResults.setVisible(true);
@@ -130,50 +141,10 @@ public class StockPortfolioController{
         buyStage.setScene(new Scene(root));
         buyStage.show();
 
-        addStocktoPortfolio(stockTicker.getText(),String.format("$%.2f", priceArr[1]));
+        addStockToPortfolio(stockTicker.getText(),String.format("$%.2f", priceArr[1]));
 
-        //stockOnPortfolio.setVisible(true);
-        VBox stockBox = new VBox();
-        Text stockTickerText = new Text(stockTicker.getText());
-        Text stockPriceText = new Text(String.format("$%.2f", priceArr[1]));
-        Text buyButton = new Text("Buy");
-        Text sellButton = new Text("Sell");
-        HBox actionBox = new HBox(buyButton, sellButton);
-        stockBox.getChildren().addAll(stockTickerText, stockPriceText, actionBox);
-        AnchorPane content = (AnchorPane) scrollPane.getContent();
-        content.getChildren().add(stockBox);
-        AnchorPane.setTopAnchor(stockBox, 10.0);
-        //stockTicker1.setText(stockTicker.getText());
-        //stockPrice1.setText(String.format("$%.2f",priceArr[1]));
-        //buy.setText("Buy");
-        //sell.setText("Sell");
+    // Method to create a VBox for a stock
 
-
-
-    }
-
-    private void addStocktoPortfolio(String text, String format) {
-        VBox newStockBox = new VBox();
-        for (javafx.scene.Node node : stockOnPortfolio.getChildren()) {
-            newStockBox.getChildren().add(cloneNode(node));
-        }
-
-    }
-
-    private javafx.scene.Node cloneNode(javafx.scene.Node node) {
-        javafx.scene.Node copy = null;
-        if (node instanceof Text) {
-            copy = new Text(((Text) node).getText());
-        } else if (node instanceof AnchorPane) {
-            // You can add further handling for other node types if necessary
-            // Here, we're assuming the AnchorPane is the container for other nodes
-            copy = new AnchorPane();
-            for (javafx.scene.Node child : ((AnchorPane) node).getChildren()) {
-                ((AnchorPane) copy).getChildren().add(cloneNode(child));
-            }
-        }
-        // You can add further handling for other node types if necessary
-        return copy;
     }
 
 }
