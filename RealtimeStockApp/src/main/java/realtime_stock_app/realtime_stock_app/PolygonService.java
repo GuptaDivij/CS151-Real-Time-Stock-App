@@ -17,7 +17,7 @@ public class PolygonService {
     private static final String API_KEY = "2QwN4O5Ornp3dcPXHp0Id6ygE1wuu2dK";
     public static double[] getPriceInfo(String symbol) throws IOException, InterruptedException {
         // Get the current date
-        LocalDate currentDate = LocalDate.now();
+        LocalDate currentDate = LocalDate.now().minusDays(1);
 
         // Check if the current date is a Saturday or Sunday
         DayOfWeek dayOfWeek = currentDate.getDayOfWeek();
