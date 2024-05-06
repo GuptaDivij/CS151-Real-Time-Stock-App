@@ -131,7 +131,7 @@ public class StockPortfolioController{
         stockBox.setSpacing(10);
         return stockBox;
     }
-    
+
     public void handleAddToPortfolio(MouseEvent mouseEvent) throws IOException {
         stockPane.setVisible(false);
         noResults.setVisible(true);
@@ -141,9 +141,9 @@ public class StockPortfolioController{
         buyStage.setScene(new Scene(root));
         buyStage.show();
 
-        addStockToPortfolio(stockTicker.getText(),String.format("$%.2f", priceArr[1]));
+        addStockToPortfolio(stockTicker.getText(), String.format("$%.2f", priceArr[1]));
 
-    // Method to create a VBox for a stock
+        // Method to create a VBox for a stock
 
     }
 
