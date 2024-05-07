@@ -44,12 +44,4 @@ public class PolygonService {
         openAndClosePrice[1] = closePrice;
         return openAndClosePrice;
     }
-    public static void main(String[] args) throws IOException, InterruptedException {
-        // NOTE: Remove before presenting
-        // only for testing the API, should return a double [] with open and close price
-        double[] arr = getPriceInfo("AAPL");
-        for(Double s: arr){
-            System.out.println(s);
-        }
-    }
 }
