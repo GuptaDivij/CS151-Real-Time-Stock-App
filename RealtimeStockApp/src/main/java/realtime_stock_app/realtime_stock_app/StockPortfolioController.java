@@ -2,6 +2,7 @@ package realtime_stock_app.realtime_stock_app;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -9,9 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Text;
@@ -125,7 +124,12 @@ public class StockPortfolioController {
         sellButton.setStyle("-fx-background-color: ADD8E6; -fx-background-radius: 5");
 
         VBox stockBox = new VBox(stockTickerText, priceText, quantityText, totalWorthText, sellButton);
+        stockBox.setAlignment(javafx.geometry.Pos.CENTER);
+        stockOnPortfolio.setPadding(new Insets(10));
+        //stockOnPortfolio.setStyle("-fx-background-radius: 10");
+        VBox.setMargin(stockBox, new Insets(0, 0, 10, 0)); // Bottom margin only
         stockBox.setStyle("-fx-background-color: #F28963; -fx-padding: 10;");
+        stockOnPortfolio.setAlignment(javafx.geometry.Pos.CENTER);
         stockOnPortfolio.getChildren().add(stockBox);
         stockOnPortfolio.setVisible(true);
     }
