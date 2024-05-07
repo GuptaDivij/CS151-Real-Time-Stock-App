@@ -99,7 +99,7 @@ public class StockPortfolioController {
     }
 
     public double getCurrentStockPrice() {
-        return priceArr.length > 0 ? priceArr[0] : 0.0; // Return current price or 0 if unavailable
+        return priceArr.length > 0 ? priceArr[1] : 0.0; // Return current price or 0 if unavailable
     }
 
     public void addStockToPortfolio(String ticker, int quantity, double price) {
