@@ -12,6 +12,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -103,12 +105,26 @@ public class StockPortfolioController {
 
     public void addStockToPortfolio(String ticker, int quantity, double price) {
         Text stockTickerText = new Text(ticker);
+        stockTickerText.setFill(Paint.valueOf("WHITE"));
+        stockTickerText.setStrokeType(StrokeType.OUTSIDE);
+        stockTickerText.setStrokeWidth(0.0);
         Text quantityText = new Text("Qty: " + quantity);
+        quantityText.setFill(Paint.valueOf("WHITE"));
+        quantityText.setStrokeType(StrokeType.OUTSIDE);
+        quantityText.setStrokeWidth(0.0);
         Text priceText = new Text(String.format("Price: $%.2f", price));
+        priceText.setFill(Paint.valueOf("WHITE"));
+        priceText.setStrokeType(StrokeType.OUTSIDE);
+        priceText.setStrokeWidth(0.0);
         double totalWorth = quantity * price;
         Text totalWorthText = new Text(String.format("Total Worth: $%.2f", totalWorth));
+        totalWorthText.setFill(Paint.valueOf("WHITE"));
+        totalWorthText.setStrokeType(StrokeType.OUTSIDE);
+        totalWorthText.setStrokeWidth(0.0);
+        Button sellButton = new Button("Sell");
+        sellButton.setStyle("-fx-background-color: ADD8E6; -fx-background-radius: 5");
 
-        VBox stockBox = new VBox(stockTickerText, priceText, quantityText, totalWorthText);
+        VBox stockBox = new VBox(stockTickerText, priceText, quantityText, totalWorthText, sellButton);
         stockBox.setStyle("-fx-background-color: #F28963; -fx-padding: 10;");
         stockOnPortfolio.getChildren().add(stockBox);
         stockOnPortfolio.setVisible(true);
