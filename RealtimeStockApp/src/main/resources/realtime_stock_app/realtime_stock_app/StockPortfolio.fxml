@@ -50,40 +50,13 @@
                   <Font name="Segoe UI" size="20.0" />
                </font>
             </Text>
-            <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="48.0" layoutY="38.0" prefHeight="338.0" prefWidth="200.0">
+            <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="48.0" layoutY="38.0" prefHeight="319.0" prefWidth="200.0" vbarPolicy="ALWAYS">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <VBox fx:id="stockOnPortfolio" alignment="TOP_CENTER" layoutX="33.0" layoutY="14.0" prefHeight="114.0" prefWidth="134.0" style="-fx-background-color: F28963;" visible="false">
+                        <VBox fx:id="stockOnPortfolio" alignment="CENTER" layoutX="33.0" layoutY="7.0" prefHeight="56.0" prefWidth="134.0" style="-fx-background-color: F28963;" visible="false">
                            <children>
-                              <HBox alignment="CENTER" prefHeight="50.0" prefWidth="149.0">
-                                 <children>
-                                    <Text fx:id="stockTicker1" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="34.98307228088379" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" prefHeight="57.0" prefWidth="134.0">
-                                 <children>
-                                    <Text fx:id="priceStatic" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Price:" wrappingWidth="38.98307228088379" />
-                                    <Text fx:id="stockPrice1" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="48.98307228088379" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" prefHeight="38.0" prefWidth="134.0">
-                                 <children>
-                                    <Text fx:id="qtyStatic" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Qty: " wrappingWidth="34.98307228088379" />
-                                    <Text fx:id="quantity" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="34.98307228088379" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" prefHeight="55.0" prefWidth="134.0">
-                                 <children>
-                                    <Text fx:id="totalWorthStatic" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Worth:" wrappingWidth="73.98307228088379" />
-                                    <Text fx:id="totalWorth" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="51.98307228088379" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" prefHeight="76.0" prefWidth="134.0">
-                                 <children>
-                                    <Button fx:id="sellButton" mnemonicParsing="false" text="Sell" />
-                                 </children>
-                              </HBox>
+                              <Button fx:id="sellButton1" mnemonicParsing="false" text="Sell" />
                            </children>
                         </VBox>
                      </children>
