@@ -16,23 +16,29 @@ public class StockBuyController {
     private TextField numStocks;
     @FXML
     private Pane rootPane;
-
     private StockPortfolioController portfolioController;
+    private String currentStockTicker; // To store the current stock ticker
 
-    public void setPortfolioController(StockPortfolioController controller) {
-        this.portfolioController = controller;
+    public void setCurrentStockTicker(String ticker) {
+        currentStockTicker = ticker;
     }
 
     public void handleBuyStocks(MouseEvent mouseEvent) {
         String numStocksText = numStocks.getText();
         try {
             int numStocksValue = Integer.parseInt(numStocksText);
-            portfolioController.addStockToPortfolio(numStocksValue);
+            double currentPrice = portfolioController.getCurrentStockPrice(); // Fetch the current stock price
+            portfolioController.addStockToPortfolio(currentStockTicker, numStocksValue, currentPrice);
             Stage stage = (Stage) rootPane.getScene().getWindow();
             stage.close();
         } catch (NumberFormatException e) {
             showAlert("Error", "Please enter a valid number.");
         }
+    }
+
+
+    public void setPortfolioController(StockPortfolioController controller) {
+        this.portfolioController = controller;
     }
 
     private void showAlert(String title, String message) {

@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -17,6 +18,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static realtime_stock_app.realtime_stock_app.PolygonService.getPriceInfo;
 
 public class StockPortfolioController {
 
@@ -32,11 +35,12 @@ public class StockPortfolioController {
     private Text stockPrice;
     @FXML
     private VBox stockOnPortfolio;
+    private String currentStockTicker;
 
-    private double[] priceArr; // This should be linked to actual stock data fetching logic
+    private double[] priceArr; // Placeholder for actual stock price data
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Initialize components if necessary
+        // Placeholder for initialization
     }
 
     public void handleStockSearch(MouseEvent mouseEvent) {
@@ -52,14 +56,15 @@ public class StockPortfolioController {
     }
 
     private void displayStockDetails(String stockTickerInput) {
+        currentStockTicker = stockTickerInput; // Store the current stock ticker
         stockTicker.setText(stockTickerInput);
-        stockPrice.setText(String.format("$%.2f", priceArr[1])); // Assuming priceArr is updated by checkIfStockExists
+        stockPrice.setText(String.format("$%.2f", priceArr[1]));
     }
 
     private boolean checkIfStockExists(String stockTicker) {
-        // Simulate stock checking logic (replace with real data fetching)
+        // Simulate stock checking (replace with real data fetching)
         try {
-            priceArr = new double[]{100.0, 150.0}; // Simulated stock price data
+            priceArr = getPriceInfo(stockTicker); // Simulated stock price data
             return true;
         } catch (Exception e) {
             showAlert("Error", "Stock not found. Please try again.");
@@ -85,17 +90,26 @@ public class StockPortfolioController {
         Parent root = loader.load();
         StockBuyController buyController = loader.getController();
         buyController.setPortfolioController(this);
+        buyController.setCurrentStockTicker(currentStockTicker); // Set the current stock ticker
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
     }
 
-    public void addStockToPortfolio(int quantity) {
-        Text stockTickerText = new Text(searchBar.getText());
+    public double getCurrentStockPrice() {
+        return priceArr.length > 0 ? priceArr[0] : 0.0; // Return current price or 0 if unavailable
+    }
+
+    public void addStockToPortfolio(String ticker, int quantity, double price) {
+        Text stockTickerText = new Text(ticker);
         Text quantityText = new Text("Qty: " + quantity);
-        VBox stockBox = new VBox(stockTickerText, quantityText);
-        stockBox.setStyle("-fx-background-color: F28963; -fx-padding: 10;");
+        Text priceText = new Text(String.format("Price: $%.2f", price));
+        double totalWorth = quantity * price;
+        Text totalWorthText = new Text(String.format("Total Worth: $%.2f", totalWorth));
+
+        VBox stockBox = new VBox(stockTickerText, priceText, quantityText, totalWorthText);
+        stockBox.setStyle("-fx-background-color: #F28963; -fx-padding: 10;");
         stockOnPortfolio.getChildren().add(stockBox);
         stockOnPortfolio.setVisible(true);
     }
