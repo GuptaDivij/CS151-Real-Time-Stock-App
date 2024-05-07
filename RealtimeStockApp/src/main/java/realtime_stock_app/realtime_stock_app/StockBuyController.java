@@ -1,35 +1,45 @@
 package realtime_stock_app.realtime_stock_app;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
-import javafx.event.ActionEvent;
-import javafx.stage.Stage;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class StockBuyController {
 
     @FXML
+    private Button buyButton;
+    @FXML
     private TextField numStocks;
     @FXML
     private Pane rootPane;
-    private int numStocksValue;
+
+    private StockPortfolioController portfolioController;
+
+    public void setPortfolioController(StockPortfolioController controller) {
+        this.portfolioController = controller;
+    }
 
     public void handleBuyStocks(MouseEvent mouseEvent) {
         String numStocksText = numStocks.getText();
         try {
-            numStocksValue = Integer.parseInt(numStocksText);
-            // Now you have the value entered the TextField as an integer
-            // You can perform further actions with this value
+            int numStocksValue = Integer.parseInt(numStocksText);
+            portfolioController.addStockToPortfolio(numStocksValue);
             Stage stage = (Stage) rootPane.getScene().getWindow();
             stage.close();
-            //divij write the stuff to get the vbox to clone and go under scroll pane here
-            //numStocksValue is the quantity
         } catch (NumberFormatException e) {
-            // Handle the case where the entered value is not a valid integer
-            e.printStackTrace();
+            showAlert("Error", "Please enter a valid number.");
         }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
