@@ -45,7 +45,7 @@ public class StockPortfolioController {
     }
 
     public void handleStockSearch(MouseEvent mouseEvent) {
-        String stockTickerUser = searchBar.getText();
+        String stockTickerUser = searchBar.getText().toUpperCase();
         if (checkIfStockExists(stockTickerUser)) {
             noResults.setVisible(false);
             stockPane.setVisible(true);

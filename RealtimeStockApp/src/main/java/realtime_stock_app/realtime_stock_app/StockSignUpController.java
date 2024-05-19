@@ -5,28 +5,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.FileWriter;
 import java.io.IOException;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
-
 import java.io.FileReader;
-import java.util.Random;
+
 
 public class StockSignUpController {
     private Stage stage;
-    //private final String fileName = "C:\\Users\\ved-j\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json";
-    private final String fileName = "C:\\Users\\musta\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json";
+    private final String fileName = "C:\\Users\\ved-j\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json";
+    //private final String fileName = "C:\\Users\\musta\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json";
     private Scene scene;
     private Parent root;
     @FXML
@@ -88,49 +82,31 @@ public class StockSignUpController {
         return !password.matches("[A-Za-z0-9 ]*");
     }
 
-    public void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-
-        // Set the content text
-        Label label = new Label(message);
-        label.setWrapText(true); // Allow text to wrap
-        label.setMaxWidth(Double.MAX_VALUE);
-        GridPane.setVgrow(label, Priority.ALWAYS);
-        alert.getDialogPane().setContent(label);
-
-        // Set the size of the dialog
-        alert.getDialogPane().setPrefSize(400, 200); // Set the preferred size as needed
-
-        alert.showAndWait();
-    }
-
     public void showAlertWithPasswordRequirements(String title, String missingRequirement) {
-        showAlert(title, "Password does not meet the following requirement:\n" + missingRequirement);
+        Alerter.showAlert(title, "Password does not meet the following requirement:\n" + missingRequirement);
     }
 
     public void handleSignUp(MouseEvent mouseEvent) throws IOException {
         // Input validation logic...
         if (firstName.getText().isEmpty()) {
-            showAlert("Error", "Please fill out the first name field.");
+            Alerter.showAlert("Error", "Please fill out the first name field.");
             return;
         }
         if (lastName.getText().isEmpty()) {
-            showAlert("Error", "Please fill out the last name field.");
+            Alerter.showAlert("Error", "Please fill out the last name field.");
             return;
         }
         if (username.getText().isEmpty()) {
-            showAlert("Error", "Please fill out the username field.");
+            Alerter.showAlert("Error", "Please fill out the username field.");
             return;
         }
 
         if (password.getText().isEmpty()) {
-            showAlert("Error", "Please fill out the password field.");
+            Alerter.showAlert("Error", "Please fill out the password field.");
             return;
         }
         if (isUsernameExists(username.getText())) {
-            showAlert("Error", "Username already exists. Please choose a different one.");
+            Alerter.showAlert("Error", "Username already exists. Please choose a different one.");
             return;
         }
 
@@ -147,16 +123,16 @@ public class StockSignUpController {
 
         try {
             // Read JSON file...
-            JSONArray jsonArray = readJsonFile();
+            JSONArray jsonArray = FileAccessor.readJsonFile(fileName);
 
             // Create user JSON object...
-            JSONObject userObj = createUserJsonObject(user);
+            JSONObject userObj = FileAccessor.createUserJsonObject(user);
 
             // Write to JSON file...
-            writeToJsonFile(jsonArray, userObj);
+            FileAccessor.writeToJsonFile(jsonArray, userObj, fileName);
         } catch (ParseException | IOException | JSONException e) {
             System.out.println(e.getMessage());
-            handleFileError(e);
+            FileAccessor.handleFileError(e);
             return;
         }
 
@@ -169,35 +145,7 @@ public class StockSignUpController {
         stage.show();
     }
 
-    private JSONArray readJsonFile() throws IOException, ParseException {
-        JSONParser jsonParser = new JSONParser();
-        try (FileReader reader = new FileReader(fileName)) {
-            Object object = jsonParser.parse(reader);
-            return (JSONArray) object;
-        }
-    }
 
-    private JSONObject createUserJsonObject(User user) throws JSONException {
-        JSONObject userObj = new JSONObject();
-        JSONObject objItem = new JSONObject();
-        objItem.put("first name", user.getFirstName());
-        objItem.put("last name", user.getLastName());
-        objItem.put("username", user.getUsername());
-        objItem.put("password", user.getPassword());
-        userObj.put(user.getUsername(), objItem);
-        return userObj;
-    }
-
-    private void writeToJsonFile(JSONArray jsonArray, JSONObject userObj) throws IOException {
-        jsonArray.add(userObj);
-        try (FileWriter file = new FileWriter(fileName)) {
-            file.write(jsonArray.toJSONString());
-        }
-    }
-
-    private void handleFileError(Exception e) {
-        showAlert("Failure", "Something went wrong. Please try again later.");
-    }
 
     private boolean isUsernameExists(String username) {
         JSONParser jsonParser = new JSONParser();
