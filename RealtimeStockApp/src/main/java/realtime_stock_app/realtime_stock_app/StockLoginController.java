@@ -20,6 +20,7 @@ public class StockLoginController {
     private TextField usernameField;
     @FXML
     private TextField passwordField;
+
     private final String fileName = "C:\\Users\\ved-j\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json";
     //private final String fileName = "/Users/divijgupta/Desktop/Study/Cs151/Project/CS151-Real-Time-Stock-App/RealtimeStockApp/src/main/java/realtime_stock_app/realtime_stock_app/UserData.json";
     //private final String fileName = "C:\\Users\\musta\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json";
@@ -55,6 +56,9 @@ public class StockLoginController {
 
             FXMLLoader portfolioLoader = new FXMLLoader(getClass().getResource("StockPortfolio.fxml"));
             root = portfolioLoader.load();
+            StockPortfolioController portfolioController = portfolioLoader.getController();
+            portfolioController.setLoginController(this);
+            portfolioController.setUsername(username);
             stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);

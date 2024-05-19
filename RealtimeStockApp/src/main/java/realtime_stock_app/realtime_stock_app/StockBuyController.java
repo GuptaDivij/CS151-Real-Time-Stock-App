@@ -7,6 +7,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
 
 public class StockBuyController {
 
@@ -32,7 +35,11 @@ public class StockBuyController {
             Stage stage = (Stage) rootPane.getScene().getWindow();
             stage.close();
         } catch (NumberFormatException e) {
-            showAlert("Error", "Please enter a valid number.");
+            Alerter.showAlert("Error", "Please enter a valid number.");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -41,11 +48,4 @@ public class StockBuyController {
         this.portfolioController = controller;
     }
 
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
 }

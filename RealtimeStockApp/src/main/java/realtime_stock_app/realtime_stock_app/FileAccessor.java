@@ -22,16 +22,36 @@ public class FileAccessor {
 
     public static JSONObject createUserJsonObject(User user) throws JSONException {
         JSONObject userObj = new JSONObject();
+        org.json.JSONArray emptyPortfolio = new org.json.JSONArray();
         JSONObject objItem = new JSONObject();
         objItem.put("first name", user.getFirstName());
         objItem.put("last name", user.getLastName());
         objItem.put("username", user.getUsername());
         objItem.put("password", user.getPassword());
+        objItem.put("portfolio", emptyPortfolio);
         userObj.put(user.getUsername(), objItem);
         return userObj;
     }
 
+    public static JSONObject createAddStockToPortfolioObject(String ticker, int quantity, double price) throws JSONException {
+        JSONObject portfolioObj = new JSONObject();
+        JSONObject objItem = new JSONObject();
+        objItem.put("Ticker", ticker);
+        objItem.put("Quantity", quantity);
+        objItem.put("Price", price);
+
+        portfolioObj.put(ticker, objItem);
+        return portfolioObj;
+    }
+
     public static void writeToJsonFile(JSONArray jsonArray, JSONObject userObj, String fileName) throws IOException {
+        jsonArray.add(userObj);
+        try (FileWriter file = new FileWriter(fileName)) {
+            file.write(jsonArray.toJSONString());
+        }
+    }
+
+    public static void writeToPortfolioJson(JSONArray jsonArray, JSONObject userObj, String fileName) throws IOException {
         jsonArray.add(userObj);
         try (FileWriter file = new FileWriter(fileName)) {
             file.write(jsonArray.toJSONString());

@@ -15,6 +15,10 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,6 +27,9 @@ import java.util.ResourceBundle;
 import static realtime_stock_app.realtime_stock_app.PolygonService.getPriceInfo;
 
 public class StockPortfolioController {
+    private final String fileName = "C:\\Users\\ved-j\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json";
+    //private final String fileName = "/Users/divijgupta/Desktop/Study/Cs151/Project/CS151-Real-Time-Stock-App/RealtimeStockApp/src/main/java/realtime_stock_app/realtime_stock_app/UserData.json";
+    //private final String fileName = "C:\\Users\\musta\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json";
 
     @FXML
     private VBox stockPane;
@@ -37,11 +44,21 @@ public class StockPortfolioController {
     @FXML
     private VBox stockOnPortfolio;
     private String currentStockTicker;
+    private String username;
+    private StockLoginController loginController;
 
     private double[] priceArr; // Placeholder for actual stock price data
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Placeholder for initialization
+    }
+
+    public void setLoginController(StockLoginController controller) {
+        this.loginController = controller;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void handleStockSearch(MouseEvent mouseEvent) {
@@ -68,22 +85,9 @@ public class StockPortfolioController {
             priceArr = getPriceInfo(stockTicker); // Simulated stock price data
             return true;
         } catch (Exception e) {
-            showAlert("Error", "Stock not found. Please try again.");
+            Alerter.showAlert("Error", "Stock not found. Please try again.");
             return false;
         }
-    }
-
-    public void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        Label label = new Label(message);
-        label.setWrapText(true);
-        label.setMaxWidth(Double.MAX_VALUE);
-        GridPane.setVgrow(label, Priority.ALWAYS);
-        alert.getDialogPane().setContent(label);
-        alert.getDialogPane().setPrefSize(400, 200);
-        alert.showAndWait();
     }
 
     public void handleBuyAddButton(MouseEvent mouseEvent) throws IOException {
@@ -102,7 +106,30 @@ public class StockPortfolioController {
         return priceArr.length > 0 ? priceArr[1] : 0.0; // Return current price or 0 if unavailable
     }
 
-    public void addStockToPortfolio(String ticker, int quantity, double price) {
+    public void addStockToPortfolio(String ticker, int quantity, double price) throws IOException, ParseException {
+        JSONArray jsonArray = null;
+        try {
+            jsonArray = FileAccessor.readJsonFile(fileName);
+            JSONObject stockObj = FileAccessor.createAddStockToPortfolioObject(ticker, quantity, price);
+            System.out.println(stockObj);
+            for (Object obj : jsonArray) {
+                org.json.simple.JSONObject user = (org.json.simple.JSONObject) obj;
+                System.out.println(user);
+                System.out.println(username);
+                if(user.containsKey(username)) {
+                    System.out.println(user);
+                    JSONArray jsonPortfolio = (JSONArray) user.get("portfolio");
+                    FileAccessor.writeToJsonFile(jsonPortfolio, stockObj, fileName);
+                }
+            }
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
         Text stockTickerText = new Text(ticker);
         stockTickerText.setFill(Paint.valueOf("WHITE"));
         stockTickerText.setStrokeType(StrokeType.OUTSIDE);
@@ -121,6 +148,7 @@ public class StockPortfolioController {
         totalWorthText.setStrokeType(StrokeType.OUTSIDE);
         totalWorthText.setStrokeWidth(0.0);
         Button sellButton = new Button("Sell");
+        sellButton.setId(stockTickerText.getText());
         sellButton.setStyle("-fx-background-color: ADD8E6; -fx-background-radius: 5");
 
         sellButton.setOnAction(event -> openStockSellFXML(ticker, quantity, price)); //handle sell button
