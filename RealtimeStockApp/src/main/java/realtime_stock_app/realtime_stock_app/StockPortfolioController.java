@@ -123,6 +123,9 @@ public class StockPortfolioController {
         Button sellButton = new Button("Sell");
         sellButton.setStyle("-fx-background-color: ADD8E6; -fx-background-radius: 5");
 
+        sellButton.setOnAction(event -> openStockSellFXML(ticker, quantity, price)); //handle sell button
+
+
         VBox stockBox = new VBox(stockTickerText, priceText, quantityText, totalWorthText, sellButton);
         stockBox.setAlignment(javafx.geometry.Pos.CENTER);
         stockOnPortfolio.setPadding(new Insets(10));
@@ -132,5 +135,23 @@ public class StockPortfolioController {
         stockOnPortfolio.setAlignment(javafx.geometry.Pos.CENTER);
         stockOnPortfolio.getChildren().add(stockBox);
         stockOnPortfolio.setVisible(true);
+    }
+    private void openStockSellFXML(String ticker, int quantity, double price) {
+        try {
+            // Load the FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("StockSell.fxml"));
+            Parent root = loader.load();
+
+            // If needed, pass data to the controller
+            StockSellController controller = loader.getController();
+            //might have to set it to current stockTicker!!!
+            // Show the FXML in a new window or dialog
+            Stage stage = new Stage();
+            stage.setTitle("Sell Stock");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
