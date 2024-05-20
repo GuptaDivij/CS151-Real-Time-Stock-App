@@ -25,10 +25,6 @@ import java.util.ResourceBundle;
 import static realtime_stock_app.realtime_stock_app.PolygonService.getPriceInfo;
 
 public class StockPortfolioController {
-    private final String fileName = "C:\\Users\\ved-j\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json";
-    //private final String fileName = "/Users/divijgupta/Desktop/Study/Cs151/Project/CS151-Real-Time-Stock-App/RealtimeStockApp/src/main/java/realtime_stock_app/realtime_stock_app/UserData.json";
-    //private final String fileName = "C:\\Users\\musta\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json";
-
     @FXML
     private VBox stockPane;
     @FXML
@@ -107,7 +103,7 @@ public class StockPortfolioController {
     public void addStockToPortfolio(String ticker, int quantity, double price) throws IOException, ParseException {
         JSONArray jsonArray = null;
         try {
-            jsonArray = FileAccessor.readJsonFile(fileName);
+            jsonArray = FileAccessor.readJsonFile();
             JSONObject stockObj = FileAccessor.createAddStockToPortfolioObject(ticker, quantity, price);
             System.out.println(stockObj);
             for (Object obj : jsonArray) {
@@ -117,7 +113,7 @@ public class StockPortfolioController {
                 if(user.containsKey(username)) {
                     System.out.println(user);
                     JSONArray jsonPortfolio = (JSONArray) user.get("portfolio");
-                    FileAccessor.writeToJsonFile(jsonPortfolio, stockObj, fileName);
+                    FileAccessor.writeToJsonFile(jsonPortfolio, stockObj);
                 }
             }
 

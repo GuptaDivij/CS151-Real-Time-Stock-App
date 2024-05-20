@@ -19,8 +19,6 @@ import java.io.FileReader;
 
 public class StockSignUpController {
     private Stage stage;
-    private final String fileName = "C:\\Users\\ved-j\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json";
-    //private final String fileName = "C:\\Users\\musta\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json";
     private Scene scene;
     private Parent root;
     @FXML
@@ -86,7 +84,7 @@ public class StockSignUpController {
         Alerter.showAlert(title, "Password does not meet the following requirement:\n" + missingRequirement);
     }
 
-    public void handleSignUp(MouseEvent mouseEvent) throws IOException {
+    public void handleSignUp(MouseEvent mouseEvent) throws IOException, ParseException {
         // Input validation logic...
         if (firstName.getText().isEmpty()) {
             Alerter.showAlert("Error", "Please fill out the first name field.");
@@ -123,13 +121,13 @@ public class StockSignUpController {
 
         try {
             // Read JSON file...
-            JSONArray jsonArray = FileAccessor.readJsonFile(fileName);
+            JSONArray jsonArray = FileAccessor.readJsonFile();
 
             // Create user JSON object...
             JSONObject userObj = FileAccessor.createUserJsonObject(user);
 
             // Write to JSON file...
-            FileAccessor.writeToJsonFile(jsonArray, userObj, fileName);
+            FileAccessor.writeToJsonFile(jsonArray, userObj);
         } catch (ParseException | IOException | JSONException e) {
             System.out.println(e.getMessage());
             FileAccessor.handleFileError(e);
@@ -147,11 +145,9 @@ public class StockSignUpController {
 
 
 
-    private boolean isUsernameExists(String username) {
-        JSONParser jsonParser = new JSONParser();
-        try (FileReader reader = new FileReader(fileName)) {
-            Object object = jsonParser.parse(reader);
-            JSONArray jsonArray = (JSONArray) object;
+    private boolean isUsernameExists(String username) throws IOException, ParseException {
+            try {
+            JSONArray jsonArray = FileAccessor.readJsonFile();
 
             // Iterate over existing users and check if username exists
             for (Object obj : jsonArray) {

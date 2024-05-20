@@ -21,10 +21,6 @@ public class StockLoginController {
     @FXML
     private TextField passwordField;
 
-    private final String fileName = "C:\\Users\\ved-j\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json";
-    //private final String fileName = "/Users/divijgupta/Desktop/Study/Cs151/Project/CS151-Real-Time-Stock-App/RealtimeStockApp/src/main/java/realtime_stock_app/realtime_stock_app/UserData.json";
-    //private final String fileName = "C:\\Users\\musta\\IdeaProjects\\CS151-Real-Time-Stock-App\\RealtimeStockApp\\src\\main\\java\\realtime_stock_app\\realtime_stock_app\\UserData.json";
-
     public void handleWelcomeOpen(MouseEvent mouseEvent) throws IOException {
         FXMLLoader welcomeLoader = new FXMLLoader(getClass().getResource("StockWelcome.fxml"));
         root = welcomeLoader.load();
@@ -69,7 +65,7 @@ public class StockLoginController {
 
         JSONArray jsonArray = null;
         try {
-            jsonArray = FileAccessor.readJsonFile(fileName);
+            jsonArray = FileAccessor.readJsonFile();
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (ParseException e) {

@@ -7,14 +7,17 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileAccessor {
-    public static JSONArray readJsonFile(String fileName) throws IOException, ParseException {
+    public static File file = new File("RealtimeStockApp/src/main/java/realtime_stock_app/realtime_stock_app/UserData.json");
+    public static String absolutePath = file.getAbsolutePath();
+    public static JSONArray readJsonFile() throws IOException, ParseException {
         JSONParser jsonParser = new JSONParser();
-        try (FileReader reader = new FileReader(fileName)) {
+        try (FileReader reader = new FileReader(absolutePath)) {
             Object object = jsonParser.parse(reader);
             return (JSONArray) object;
         }
@@ -44,16 +47,16 @@ public class FileAccessor {
         return portfolioObj;
     }
 
-    public static void writeToJsonFile(JSONArray jsonArray, JSONObject userObj, String fileName) throws IOException {
+    public static void writeToJsonFile(JSONArray jsonArray, JSONObject userObj) throws IOException {
         jsonArray.add(userObj);
-        try (FileWriter file = new FileWriter(fileName)) {
+        try (FileWriter file = new FileWriter(absolutePath)) {
             file.write(jsonArray.toJSONString());
         }
     }
 
-    public static void writeToPortfolioJson(JSONArray jsonArray, JSONObject userObj, String fileName) throws IOException {
+    public static void writeToPortfolioJson(JSONArray jsonArray, JSONObject userObj) throws IOException {
         jsonArray.add(userObj);
-        try (FileWriter file = new FileWriter(fileName)) {
+        try (FileWriter file = new FileWriter(absolutePath)) {
             file.write(jsonArray.toJSONString());
         }
     }
