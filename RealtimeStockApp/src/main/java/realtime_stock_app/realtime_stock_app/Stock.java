@@ -11,8 +11,6 @@ public class Stock {
      * Constructor for the Stock class.
      *
      * @param symbol The symbol of the stock.
-     * @param currentPrice The current trading price of the stock.
-     * @param priceChangePercentage The percentage change in price of the stock.
      */
     public Stock(String symbol) throws IOException, InterruptedException {
         this.symbol = symbol;
