@@ -2,6 +2,16 @@ Team #10
 
 Team Members: Ved Joshi, Nishit Oberoi, Divij Gupta
 
+**Presentation Proposal:**
+Divij Gupta: Worked om everinoment and technologies needed for project and prev works and problem/issue. 
+Nishit Oberoi: Worked on functionlaitites and operation
+Ved Joshi: Worked on functionlaitites and operation.
+
+**On the project presentation:**
+Divij presented on the slide show that we made collectively.
+Nish presented the sign up and login functionality of the app.
+Ved presented the search and portfolio functionalities of the app.
+
  **Real Time Stock App**
 
 **State the problem/issue:**
