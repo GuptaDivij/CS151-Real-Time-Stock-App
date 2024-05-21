@@ -33,6 +33,9 @@ Users will require a stable internet connection to receive real-time updates.
 
 Intended users are investors and traders who rely on accurate and timely stock market information
 
+**Diagrams**
+-Check the github repo folder RealtimeStockApp
+
 **High-Level Description of Solution:**
 
 Our solution involves developing a real-time stock tracking application with a user-friendly interface, customizable watchlists, comprehensive stock data, and timely news updates. We plan to utilize java and javafx to create this application.
