@@ -101,29 +101,29 @@ public class StockPortfolioController {
     }
 
     public void addStockToPortfolio(String ticker, int quantity, double price) throws IOException, ParseException {
-        JSONArray jsonArray = null;
-        try {
-            jsonArray = FileAccessor.readJsonFile();
-            JSONObject stockObj = FileAccessor.createAddStockToPortfolioObject(ticker, quantity, price);
-            System.out.println(stockObj);
-            for (Object obj : jsonArray) {
-                org.json.simple.JSONObject user = (org.json.simple.JSONObject) obj;
-                System.out.println(user);
-                System.out.println(username);
-                if(user.containsKey(username)) {
-                    System.out.println(user);
-                    JSONArray jsonPortfolio = (JSONArray) user.get("portfolio");
-                    FileAccessor.writeToJsonFile(jsonPortfolio, stockObj);
-                }
-            }
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
+//        JSONArray jsonArray = null;
+//        try {
+//            jsonArray = FileAccessor.readJsonFile();
+//            JSONObject stockObj = FileAccessor.createAddStockToPortfolioObject(ticker, quantity, price);
+//            System.out.println(stockObj);
+//            for (Object obj : jsonArray) {
+//                org.json.simple.JSONObject user = (org.json.simple.JSONObject) obj;
+//                System.out.println(user);
+//                System.out.println(username);
+//                if(user.containsKey(username)) {
+//                    System.out.println(user);
+//                    JSONArray jsonPortfolio = (JSONArray) user.get("portfolio");
+//                    FileAccessor.writeToJsonFile(jsonPortfolio, stockObj);
+//                }
+//            }
+//
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        } catch (ParseException e) {
+//            throw new RuntimeException(e);
+//        } catch (JSONException e) {
+//            throw new RuntimeException(e);
+//        }
         Text stockTickerText = new Text(ticker);
         stockTickerText.setFill(Paint.valueOf("WHITE"));
         stockTickerText.setStrokeType(StrokeType.OUTSIDE);
