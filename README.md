@@ -12,6 +12,11 @@ Divij presented on the slide show that we made collectively.
 Nish presented the sign up and login functionality of the app.
 Ved presented the search and portfolio functionalities of the app.
 
+**Project Code:**
+Divij Gupta: Stock class, user class, portfolio class, main application/controller, and polygon service API.
+Nishit Oberoi: Login controller, buy controller, sell controller, signup controller, and fxml files for the scenes. 
+Ved Joshi: User json file, welcome controller, signup and login controller, and fxml files. 
+
  **Real Time Stock App**
 
 **State the problem/issue:**
