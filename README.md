@@ -48,7 +48,7 @@ Buy function: Upon searching a stock users can buy that stock by entering in a q
 
 Portfolio: The user's portfolio displays their owned stocks and a search bar to search for more stocks to buy. 
 
-Sell Function: The sell fucntion appears when stock is displayed on the portfolio (after buying). Upon clicking the sell button users can sell the desired amount. 
+Sell Function: The sell function appears when stock is displayed on the portfolio (after buying). Upon clicking the sell button users can sell the desired amount. 
 
 **Operations:**
 
@@ -65,6 +65,13 @@ Access News Feed
 Perform Technical Analysis
 
 Manage Portfolio
+
+**Steps to run your code**
+
+1. Clone the repository.
+2. Go to Polygon API's website and generate an API Key: https://polygon.io/stocks?utm_term=polygon.io&utm_campaign=Brand+-+ALL+(Conv+Value+tROAS)&utm_source=adwords&utm_medium=ppc&hsa_acc=4299129556&hsa_cam=14536485495&hsa_grp=132004734661&hsa_ad=591202818400&hsa_src=g&hsa_tgt=kwd-812066473604&hsa_kw=polygon.io&hsa_mt=p&hsa_net=adwords&hsa_ver=3&gad_source=1&gclid=Cj0KCQjwjLGyBhCYARIsAPqTz19ilAXY25bo-cAJwQBs7dre-3_Z10Y_kigq53vj-2ln8-wkGWBgN3UaAg0ZEALw_wcB
+3. Create a class called "Environment" where you house your API key as a static variable.
+4. Go to the MainApplication class and run the program.
 
 **References:**
 
