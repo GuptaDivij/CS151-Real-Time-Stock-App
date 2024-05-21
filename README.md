@@ -42,15 +42,13 @@ Our solution involves developing a real-time stock tracking application with a u
 
 **Functionalities:**
 
-Real-time Stock Data Updates: The application will fetch real-time stock prices and market data from reliable sources.
+Real-time Stock Price Updates: The application will fetch real-time closing stock prices from the previous day upon entering the stock ticker. 
 
-Customizable Watchlists: Users can create personalized watchlists to track their favorite stocks and receive alerts for price changes.
+Buy function: Upon searching a stock users can buy that stock by entering in a quatity. The stock (ticker, price per stock, total value of that stock owned) will appear on the user's portfolio.
 
-News Feed Integration: The app will include a news feed feature to provide users with the latest market news and analysis.
+Portfolio: The user's portfolio displays their owned stocks and a search bar to search for more stocks to buy. 
 
-Technical Analysis Tools: Advanced charting tools and technical indicators will be available for users to perform in-depth analysis of stock trends - give out graphs and charts to further investigate a stock’s history.
-
-Portfolio Management: Users can manage their investment portfolios, track performance, and view historical data.
+Sell Function: The sell fucntion appears when stock is displayed on the portfolio (after buying). Upon clicking the sell button users can sell the desired amount. 
 
 **Operations:**
 
