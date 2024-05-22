@@ -4,5 +4,6 @@ import javafx.scene.input.MouseEvent;
 
 public class StockSellController {
     public void handleSellStocks(MouseEvent mouseEvent) {
+
     }
 }
