@@ -67,7 +67,7 @@ Manage Portfolio
 
 **Snapshot of the running program:**
 
-![Code Snapshot]([src/main/resources/realtime_stock_app/realtime_stock_app/CodeSnapshots/Screenshot%202024-05-22%20151011.png](https://github.com/GuptaDivij/CS151-Real-Time-Stock-App/blob/main/RealtimeStockApp/src/main/resources/realtime_stock_app/realtime_stock_app/CodeSnapshots/Screenshot%202024-05-22%20151011.png))
+![Code Snapshot](https://github.com/GuptaDivij/CS151-Real-Time-Stock-App/blob/main/RealtimeStockApp/src/main/resources/realtime_stock_app/realtime_stock_app/CodeSnapshots/Screenshot%202024-05-22%20151011.png)
 
 **References:**
 
