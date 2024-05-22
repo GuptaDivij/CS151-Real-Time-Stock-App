@@ -68,6 +68,11 @@ Manage Portfolio
 **Snapshot of the running program:**
 
 ![Code Snapshot](https://github.com/GuptaDivij/CS151-Real-Time-Stock-App/blob/main/RealtimeStockApp/src/main/resources/realtime_stock_app/realtime_stock_app/CodeSnapshots/Screenshot%202024-05-22%20151011.png)
+![Code Snapshot](https://github.com/GuptaDivij/CS151-Real-Time-Stock-App/blob/main/RealtimeStockApp/src/main/resources/realtime_stock_app/realtime_stock_app/CodeSnapshots/Screenshot%202024-05-22%20151022.png)
+![Code Snapshot](https://github.com/GuptaDivij/CS151-Real-Time-Stock-App/blob/main/RealtimeStockApp/src/main/resources/realtime_stock_app/realtime_stock_app/CodeSnapshots/Screenshot%202024-05-22%20151054.png)
+![Code Snapshot](https://github.com/GuptaDivij/CS151-Real-Time-Stock-App/blob/main/RealtimeStockApp/src/main/resources/realtime_stock_app/realtime_stock_app/CodeSnapshots/Screenshot%202024-05-22%20151104.png)
+![Code Snapshot](https://github.com/GuptaDivij/CS151-Real-Time-Stock-App/blob/main/RealtimeStockApp/src/main/resources/realtime_stock_app/realtime_stock_app/CodeSnapshots/Screenshot%202024-05-22%20151127.png)
+![Code Snapshot](https://github.com/GuptaDivij/CS151-Real-Time-Stock-App/blob/main/RealtimeStockApp/src/main/resources/realtime_stock_app/realtime_stock_app/CodeSnapshots/Screenshot%202024-05-22%20151142.png)
 
 **References:**
 
