@@ -73,6 +73,10 @@ Manage Portfolio
 ![Code Snapshot](https://github.com/GuptaDivij/CS151-Real-Time-Stock-App/blob/main/RealtimeStockApp/src/main/resources/realtime_stock_app/realtime_stock_app/CodeSnapshots/Screenshot%202024-05-22%20151104.png)
 ![Code Snapshot](https://github.com/GuptaDivij/CS151-Real-Time-Stock-App/blob/main/RealtimeStockApp/src/main/resources/realtime_stock_app/realtime_stock_app/CodeSnapshots/Screenshot%202024-05-22%20151127.png)
 ![Code Snapshot](https://github.com/GuptaDivij/CS151-Real-Time-Stock-App/blob/main/RealtimeStockApp/src/main/resources/realtime_stock_app/realtime_stock_app/CodeSnapshots/Screenshot%202024-05-22%20151142.png)
+![Code Snapshot](https://github.com/GuptaDivij/CS151-Real-Time-Stock-App/blob/main/RealtimeStockApp/src/main/resources/realtime_stock_app/realtime_stock_app/CodeSnapshots/Screenshot%202024-05-22%20151156.png)
+![Code Snapshot](https://github.com/GuptaDivij/CS151-Real-Time-Stock-App/blob/main/RealtimeStockApp/src/main/resources/realtime_stock_app/realtime_stock_app/CodeSnapshots/Screenshot%202024-05-22%20151207.png)
+![Code Snapshot](https://github.com/GuptaDivij/CS151-Real-Time-Stock-App/blob/main/RealtimeStockApp/src/main/resources/realtime_stock_app/realtime_stock_app/CodeSnapshots/Screenshot%202024-05-22%20151252.png)
+
 
 **References:**
 
