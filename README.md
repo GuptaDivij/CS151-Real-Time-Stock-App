@@ -17,7 +17,7 @@ Divij Gupta: Stock class, user class, portfolio class, main application/controll
 Nishit Oberoi: Login controller, buy controller, sell controller, signup controller, and fxml files for the scenes. 
 Ved Joshi: User json file, welcome controller, signup and login controller, and fxml files. 
 
- **Real Time Stock App**
+ **Stockify**
 
 **State the problem/issue:**
 
@@ -55,14 +55,6 @@ Sell Function: The sell function appears when stock is displayed on the portfoli
 User Registration/Login
 
 Search for Stocks
-
-Add Stocks to Watchlist
-
-View Real-Time Stock Prices
-
-Access News Feed
-
-Perform Technical Analysis
 
 Manage Portfolio
 
