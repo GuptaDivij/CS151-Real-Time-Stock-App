@@ -65,6 +65,10 @@ Manage Portfolio
 3. Create a class called "Environment" where you house your API key as a static variable.
 4. Go to the MainApplication class and run the program.
 
+**Snapshot of the running program:**
+
+![Code Snapshot](src/main/resources/realtime_stock_app/realtime_stock_app/CodeSnapshots/Screenshot%202024-05-22%20151011.png)
+
 **References:**
 
 Robinhood: https://robinhood.com/
